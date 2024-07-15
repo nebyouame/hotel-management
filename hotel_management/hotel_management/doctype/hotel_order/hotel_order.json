@@ -1,0 +1,79 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-07-15 21:15:32.556529",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "table_order_no",
+  "waiter",
+  "order_date",
+  "rf_number",
+  "items_table"
+ ],
+ "fields": [
+  {
+   "fieldname": "table_order_no",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Table no.",
+   "options": "Table Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "waiter",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Waiter",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "order_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "rf_number",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "RF-Numebr",
+   "reqd": 1
+  },
+  {
+   "fieldname": "items_table",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Sales Order Item",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-07-15 21:15:32.556529",
+ "modified_by": "Administrator",
+ "module": "Hotel Management",
+ "name": "Hotel Order",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
