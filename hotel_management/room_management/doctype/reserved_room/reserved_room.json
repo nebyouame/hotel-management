@@ -22,6 +22,7 @@
    "label": "Room"
   },
   {
+   "columns": 1,
    "fieldname": "room",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -69,6 +70,7 @@
    "set_only_once": 1
   },
   {
+   "columns": 1,
    "fieldname": "price",
    "fieldtype": "Currency",
    "in_list_view": 1,
@@ -77,18 +79,20 @@
    "reqd": 1
   },
   {
+   "columns": 1,
    "fieldname": "total_price",
    "fieldtype": "Currency",
    "in_list_view": 1,
    "label": "Total Price",
    "read_only": 1,
-   "reqd": 1
+   "reqd": 1,
+   "set_only_once": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-07-19 14:37:13.443601",
+ "modified": "2024-07-19 21:52:56.594920",
  "modified_by": "Administrator",
  "module": "Room Management",
  "name": "Reserved Room",
