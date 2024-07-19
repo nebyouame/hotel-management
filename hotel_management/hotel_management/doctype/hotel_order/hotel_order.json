@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "naming_series:",
  "creation": "2024-07-15 21:15:32.556529",
  "default_view": "List",
  "doctype": "DocType",
@@ -9,15 +10,22 @@
  "field_order": [
   "table_order_no",
   "waiter",
+  "column_break1",
   "order_date",
-  "rf_number",
-  "items_table"
+  "section_break1",
+  "hotel_items",
+  "section_break2",
+  "total_qty",
+  "column_break2",
+  "total",
+  "naming_series"
  ],
  "fields": [
   {
    "fieldname": "table_order_no",
    "fieldtype": "Link",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Table no.",
    "options": "Table Number",
    "reqd": 1
@@ -26,38 +34,74 @@
    "fieldname": "waiter",
    "fieldtype": "Link",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Waiter",
-   "options": "User",
+   "options": "Waiter",
    "reqd": 1
   },
   {
    "fieldname": "order_date",
    "fieldtype": "Date",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Date",
+   "read_only": 1,
    "reqd": 1
   },
   {
-   "fieldname": "rf_number",
-   "fieldtype": "Int",
-   "in_list_view": 1,
-   "label": "RF-Numebr",
-   "reqd": 1
+   "fieldname": "total_qty",
+   "fieldtype": "Float",
+   "label": "Total Quantity"
   },
   {
-   "fieldname": "items_table",
+   "fieldname": "total",
+   "fieldtype": "Currency",
+   "label": "Total(ETB)"
+  },
+  {
+   "fieldname": "column_break1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break1",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break2",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "hotel_items",
    "fieldtype": "Table",
-   "label": "Items",
-   "options": "Sales Order Item",
+   "label": "Orders",
+   "options": "Hotel Order Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "HOTEL-ORD-.YYYY.-",
    "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2024-07-15 21:15:32.556529",
+ "links": [
+  {
+   "group": "Sales Invoice",
+   "link_doctype": "Sales Invoice",
+   "link_fieldname": "hotel_order"
+  }
+ ],
+ "modified": "2024-07-19 00:29:12.545573",
  "modified_by": "Administrator",
  "module": "Hotel Management",
  "name": "Hotel Order",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {

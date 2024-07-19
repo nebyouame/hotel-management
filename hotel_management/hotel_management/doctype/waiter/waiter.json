@@ -1,29 +1,29 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:table_no",
- "creation": "2024-07-15 21:09:54.750308",
+ "autoname": "field:waiter",
+ "creation": "2024-07-17 03:41:04.546324",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "table_no"
+  "waiter"
  ],
  "fields": [
   {
-   "fieldname": "table_no",
-   "fieldtype": "Int",
-   "label": "Table no.",
+   "fieldname": "waiter",
+   "fieldtype": "Data",
+   "label": "Waiter",
    "unique": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-07-16 09:34:47.267653",
+ "modified": "2024-07-17 03:43:32.639317",
  "modified_by": "Administrator",
  "module": "Hotel Management",
- "name": "Table Number",
+ "name": "Waiter",
  "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [

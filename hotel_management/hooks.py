@@ -213,3 +213,9 @@ app_license = "MIT"
 # auth_hooks = [
 # 	"hotel_management.auth.validate"
 # ]
+
+# doc_events = {
+#     "Single Order": {
+#         "on_update": "hotel_management.hotel_management.doctype.single_order.single_order.update_hotel_order_status"
+#     }
+# }
