@@ -1,0 +1,102 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-07-18 14:16:12.061213",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "room_section",
+  "type",
+  "room",
+  "price",
+  "column_break_qgww",
+  "reservation_date",
+  "room_reservation_id",
+  "child_table_id"
+ ],
+ "fields": [
+  {
+   "fieldname": "room_section",
+   "fieldtype": "Section Break",
+   "label": "Room"
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Type",
+   "options": "Room Type",
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "room",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Room",
+   "options": "Room",
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "price",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Price",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_qgww",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "child_table_id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Child Table Id",
+   "options": "Reserved Room",
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "reservation_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Reservation Date",
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "room_reservation_id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Room Reservation Id",
+   "options": "Room Reservation",
+   "reqd": 1,
+   "set_only_once": 1
+  }
+ ],
+ "links": [],
+ "modified": "2024-07-18 21:36:12.190989",
+ "modified_by": "Administrator",
+ "module": "Room Management",
+ "name": "Single Reservations",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
