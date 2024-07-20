@@ -90,14 +90,8 @@
   }
  ],
  "index_web_pages_for_search": 1,
- "links": [
-  {
-   "group": "Sales Invoice",
-   "link_doctype": "Sales Invoice",
-   "link_fieldname": "hotel_order"
-  }
- ],
- "modified": "2024-07-19 00:29:12.545573",
+ "links": [],
+ "modified": "2024-07-19 17:37:09.276977",
  "modified_by": "Administrator",
  "module": "Hotel Management",
  "name": "Hotel Order",
