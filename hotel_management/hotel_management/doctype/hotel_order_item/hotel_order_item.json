@@ -60,14 +60,14 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Menu ",
-   "options": "Item",
+   "options": "Menu",
    "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-07-17 17:20:46.353168",
+ "modified": "2024-07-22 00:55:11.301377",
  "modified_by": "Administrator",
  "module": "Hotel Management",
  "name": "Hotel Order Item",

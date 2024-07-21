@@ -31,15 +31,15 @@ frappe.ui.form.on('Hotel Order', {
                 frappe.call({
                     method: 'frappe.client.get_list',
                     args: {
-                        doctype: 'Item',
-                        filters: { name: ['in', itemCodes] },
-                        fields: ['name', 'image']
+                        doctype: 'Menu',
+                        filters: { menu: ['in', itemCodes] },
+                        fields: ['menu', 'image']
                     },
-                    callback: function(itemResults) {
-                        if (itemResults.message && itemResults.message.length > 0) {
-                            let itemImages = {};
-                            itemResults.message.forEach(function(item) {
-                                itemImages[item.name] = item.image;
+                    callback: function(menuResults) {
+                        if (menuResults.message && menuResults.message.length > 0) {
+                            let menuImages = {};
+                            menuResults.message.forEach(function(menu) {
+                                menuImages[menu.menu] = menu.image;
                             });
 
                             frm.doc.hotel_items.forEach(function(item) {
@@ -50,7 +50,7 @@ frappe.ui.form.on('Hotel Order', {
                                         item_name: item.item_name,
                                         qty: item.qty,
                                         name: item.name,
-                                        image: itemImages[item.item_code] || null 
+                                        image: menuImages[item.item_code] || null 
                                     });
                                 }
                             });
@@ -128,7 +128,7 @@ frappe.ui.form.on('Hotel Order', {
                                 });
                             });
                         } else {
-                            console.log('No item images found');
+                            console.log('No menu images found');
                         }
                     }
                 });
@@ -150,14 +150,14 @@ frappe.ui.form.on('Hotel Order Item', {
         frappe.call({
             method: 'frappe.client.get_list',
             args: {
-                doctype: 'Item Price',
-                filters: { item_code: row.item_code },
-                fields: ['price_list_rate'],
+                doctype: 'Menu',
+                filters: { menu: row.item_code },
+                fields: ['rate'],
                 limit: 1
             },
             callback: function(r) {
                 if (r.message && r.message.length > 0) {
-                    let rate = r.message[0].price_list_rate;
+                    let rate = r.message[0].rate;
                     frappe.model.set_value(cdt, cdn, 'rate', rate);
                     let amount = row.qty * rate;
                     frappe.model.set_value(cdt, cdn, 'amount', amount);
