@@ -5,6 +5,7 @@ from frappe.model.document import Document
 class HotelOrder(Document):
     def validate(self):
         self.calculate_totals()
+        self.validate_chief_for_menu()
 
     def calculate_totals(self):
         total_qty = 0
@@ -17,6 +18,12 @@ class HotelOrder(Document):
         self.total_qty = total_qty
         self.total = total
 
+    def validate_chief_for_menu(self):
+        for item in self.get('hotel_items'):
+            is_prepared_by_employee = frappe.db.get_value('Menu', item.item_code, 'is_prepared_by_employee')
+            frappe.log_error(f"Menu: {item.item_code}, Is Prepared By Employee: {is_prepared_by_employee}, Chief: {item.chief}", "Validation Debug")
+            if is_prepared_by_employee and not item.chief:
+                frappe.throw(f"Please put an employee name that must prepare the {item.item_code} you just put in the menu.")
 
 @frappe.whitelist()
 def update_hotel_order_item_status(hotel_order_item_name, status):

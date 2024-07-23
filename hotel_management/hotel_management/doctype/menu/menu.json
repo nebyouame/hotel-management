@@ -13,7 +13,8 @@
   "column_break1",
   "rate",
   "currency",
-  "image"
+  "image",
+  "is_prepared_by_employee"
  ],
  "fields": [
   {
@@ -54,12 +55,18 @@
    "in_list_view": 1,
    "label": "Rate",
    "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_prepared_by_employee",
+   "fieldtype": "Check",
+   "label": "Is Prepared by Employee"
   }
  ],
  "image_field": "image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-07-23 05:40:24.398030",
+ "modified": "2024-07-23 05:47:33.267147",
  "modified_by": "Administrator",
  "module": "Hotel Management",
  "name": "Menu",
