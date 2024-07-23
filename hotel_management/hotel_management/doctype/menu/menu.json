@@ -26,10 +26,10 @@
   },
   {
    "fieldname": "menu_type",
-   "fieldtype": "Select",
+   "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Menu Type ",
-   "options": "Food\nDrink\nDesert",
+   "options": "Menu Type",
    "reqd": 1
   },
   {
@@ -59,7 +59,7 @@
  "image_field": "image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-07-22 00:56:01.330433",
+ "modified": "2024-07-23 05:40:24.398030",
  "modified_by": "Administrator",
  "module": "Hotel Management",
  "name": "Menu",
