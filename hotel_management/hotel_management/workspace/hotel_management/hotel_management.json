@@ -1,0 +1,55 @@
+{
+ "charts": [
+  {
+   "chart_name": "Today's Unreserved Rooms",
+   "label": "Unreserved Rooms"
+  }
+ ],
+ "content": "[{\"id\":\"xyUlyxcQO_\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Hotel Management</span>\",\"col\":12}},{\"id\":\"8MC7GDdNWO\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Orders\",\"col\":4}},{\"id\":\"CmMz7XhP5A\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Single Order\",\"col\":4}},{\"id\":\"iCezsenXLV\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"1iGEoKVZBL\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Room Management</b></span>\",\"col\":12}},{\"id\":\"JKNw6mbGd_\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Reservations\",\"col\":4}},{\"id\":\"oLW4uKmERe\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Rooms\",\"col\":4}},{\"id\":\"d59yfmIqiB\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Unreserved Rooms\",\"col\":6}}]",
+ "creation": "2024-07-19 17:15:35.037691",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "retail",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "Hotel Management",
+ "links": [],
+ "modified": "2024-07-21 07:21:19.319603",
+ "modified_by": "Administrator",
+ "module": "Hotel Management",
+ "name": "Hotel Management",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [
+  {
+   "document_type": "Room",
+   "label": "Rooms",
+   "quick_list_filter": "[]"
+  },
+  {
+   "document_type": "Room Reservation",
+   "label": "Reservations",
+   "quick_list_filter": "[]"
+  },
+  {
+   "document_type": "Single Order",
+   "label": "Single Order",
+   "quick_list_filter": "[]"
+  },
+  {
+   "document_type": "Hotel Order",
+   "label": "Orders",
+   "quick_list_filter": "[]"
+  }
+ ],
+ "roles": [],
+ "sequence_id": 19.0,
+ "shortcuts": [],
+ "title": "Hotel Management"
+}
