@@ -23,6 +23,7 @@
   },
   {
    "columns": 1,
+   "depends_on": "eval:doc.ends_on != undefined;",
    "fieldname": "room",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -43,10 +44,12 @@
   },
   {
    "columns": 1,
+   "depends_on": "eval:doc.price != undefined;",
    "fieldname": "stay_days",
    "fieldtype": "Int",
    "in_list_view": 1,
    "label": "Stay Days",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -69,6 +72,7 @@
   },
   {
    "columns": 1,
+   "depends_on": "eval:doc.room != undefined;",
    "fieldname": "price",
    "fieldtype": "Currency",
    "in_list_view": 1,
@@ -78,17 +82,19 @@
   },
   {
    "columns": 1,
+   "depends_on": "eval:doc.stay_days != undefined;",
    "fieldname": "total_price",
    "fieldtype": "Currency",
    "in_list_view": 1,
    "label": "Total Price",
+   "read_only": 1,
    "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-07-20 08:43:47.065214",
+ "modified": "2024-07-24 21:11:08.116373",
  "modified_by": "Administrator",
  "module": "Room Management",
  "name": "Reserved Room",
