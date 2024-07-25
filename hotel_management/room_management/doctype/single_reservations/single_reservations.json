@@ -74,12 +74,11 @@
    "in_list_view": 1,
    "label": "Room Reservation Id",
    "options": "Room Reservation",
-   "reqd": 1,
    "set_only_once": 1
   }
  ],
  "links": [],
- "modified": "2024-07-18 21:36:12.190989",
+ "modified": "2024-07-25 13:13:38.954215",
  "modified_by": "Administrator",
  "module": "Room Management",
  "name": "Single Reservations",

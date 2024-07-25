@@ -49,7 +49,6 @@ class RoomReservation(Document):
 								"room": reservation.room,
 								"price": reservation.price,
 								"reservation_date": start,
-								"room_reservation_id": reservation._parent_doc,
 								"child_table_id": reservation.name,
 							}
 						)
@@ -76,7 +75,7 @@ class RoomReservation(Document):
 							"room": reservation.room,
 							"price": reservation.price,
 							"reservation_date": start,
-							"room_reservation_id": reservation._parent_doc,
+							# "room_reservation_id": reservation._parent_doc,
 							"child_table_id": reservation.name,
 						}
 					)
