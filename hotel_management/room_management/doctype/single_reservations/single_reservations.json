@@ -78,13 +78,14 @@
   }
  ],
  "links": [],
- "modified": "2024-07-25 13:13:38.954215",
+ "modified": "2024-07-25 13:21:14.313394",
  "modified_by": "Administrator",
  "module": "Room Management",
  "name": "Single Reservations",
  "owner": "Administrator",
  "permissions": [
   {
+   "create": 1,
    "delete": 1,
    "email": 1,
    "export": 1,
@@ -92,7 +93,8 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
-   "share": 1
+   "share": 1,
+   "write": 1
   }
  ],
  "sort_field": "modified",
