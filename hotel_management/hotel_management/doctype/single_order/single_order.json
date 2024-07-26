@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:{quantity} {menu}",
  "creation": "2024-07-16 19:34:13.246612",
  "default_view": "Image",
  "doctype": "DocType",
@@ -99,10 +100,11 @@
  "image_field": "image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-07-22 01:03:22.829063",
+ "modified": "2024-07-26 07:04:19.273092",
  "modified_by": "Administrator",
  "module": "Hotel Management",
  "name": "Single Order",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
