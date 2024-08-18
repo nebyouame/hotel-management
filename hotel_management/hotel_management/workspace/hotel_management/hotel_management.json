@@ -3,9 +3,13 @@
   {
    "chart_name": "Today's Unreserved Rooms",
    "label": "Unreserved Rooms"
+  },
+  {
+   "chart_name": "Daily Revenue",
+   "label": "Daily Revenue"
   }
  ],
- "content": "[{\"id\":\"xyUlyxcQO_\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Hotel Management</span>\",\"col\":12}},{\"id\":\"8MC7GDdNWO\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Orders\",\"col\":4}},{\"id\":\"CmMz7XhP5A\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Single Order\",\"col\":4}},{\"id\":\"iCezsenXLV\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"1iGEoKVZBL\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Room Management</b></span>\",\"col\":12}},{\"id\":\"JKNw6mbGd_\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Reservations\",\"col\":4}},{\"id\":\"oLW4uKmERe\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Rooms\",\"col\":4}},{\"id\":\"d59yfmIqiB\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Unreserved Rooms\",\"col\":6}}]",
+ "content": "[{\"id\":\"xyUlyxcQO_\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Hotel Management</span>\",\"col\":12}},{\"id\":\"8MC7GDdNWO\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Orders\",\"col\":4}},{\"id\":\"CmMz7XhP5A\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Single Order\",\"col\":4}},{\"id\":\"iCezsenXLV\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"1iGEoKVZBL\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Room Management</b></span>\",\"col\":12}},{\"id\":\"JKNw6mbGd_\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Reservations\",\"col\":4}},{\"id\":\"oLW4uKmERe\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Rooms\",\"col\":4}},{\"id\":\"d59yfmIqiB\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Unreserved Rooms\",\"col\":6}},{\"id\":\"AqfepA8ojR\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Daily Revenue\",\"col\":6}}]",
  "creation": "2024-07-19 17:15:35.037691",
  "custom_blocks": [],
  "docstatus": 0,
@@ -18,7 +22,7 @@
  "is_hidden": 0,
  "label": "Hotel Management",
  "links": [],
- "modified": "2024-07-21 07:21:19.319603",
+ "modified": "2024-07-25 20:10:06.093318",
  "modified_by": "Administrator",
  "module": "Hotel Management",
  "name": "Hotel Management",

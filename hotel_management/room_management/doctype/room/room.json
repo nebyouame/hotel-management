@@ -34,12 +34,13 @@
    "label": "Floor "
   },
   {
+   "default": "Unreserved",
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Status",
-   "options": "Reserved\nUnreserved"
+   "options": "Unreserved\nReserved"
   },
   {
    "fieldname": "image",
@@ -72,7 +73,7 @@
    "link_fieldname": "room"
   }
  ],
- "modified": "2024-07-21 07:13:31.286918",
+ "modified": "2024-08-17 05:31:40.991411",
  "modified_by": "Administrator",
  "module": "Room Management",
  "name": "Room",
@@ -95,5 +96,14 @@
  "show_preview_popup": 1,
  "sort_field": "status",
  "sort_order": "DESC",
- "states": []
+ "states": [
+  {
+   "color": "Green",
+   "title": "Unreserved"
+  },
+  {
+   "color": "Red",
+   "title": "Reserved"
+  }
+ ]
 }

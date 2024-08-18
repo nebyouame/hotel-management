@@ -5,10 +5,15 @@
 from datetime import datetime, timedelta
 import frappe
 from frappe.model.document import Document
+from frappe.utils import now_datetime
 
 
 class ReservedRoom(Document):
 	def before_save(self):
-		print("parnet doc ",self._parent_doc)
-		print("child save: ",self.get('__unsaved'))
+		print("check_out_time ",self.check_out_time == None)
+		if self.status == "Check-in" and self.check_in_time == None:
+			self.check_in_time = now_datetime()
+		if self.status == "Check-out" and self.check_out_time == None:
+			self.check_out_time = now_datetime()
+
 		

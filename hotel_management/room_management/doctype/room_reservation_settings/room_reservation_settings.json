@@ -1,0 +1,102 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-08-11 11:48:56.051461",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "late_section",
+  "check_out_time",
+  "column_break_3xmj",
+  "enable_late_check_out_penalty",
+  "late_check_out_penalty",
+  "vary_late_section",
+  "very_late_check_out_time",
+  "column_break_ifw2",
+  "enable_very_late_check_out_penalty",
+  "very_late_check_out_penalty"
+ ],
+ "fields": [
+  {
+   "fieldname": "check_out_time",
+   "fieldtype": "Time",
+   "label": "Check-Out Time",
+   "mandatory_depends_on": "eval:doc.enable_late_check_out_penalty == true"
+  },
+  {
+   "depends_on": "eval:doc.enable_late_check_out_penalty == true",
+   "fieldname": "late_check_out_penalty",
+   "fieldtype": "Select",
+   "label": "Late Check-Out Penalty",
+   "mandatory_depends_on": "eval:doc.enable_late_check_out_penalty == true",
+   "options": "Half price of the room\nFull price of the room"
+  },
+  {
+   "fieldname": "column_break_3xmj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_ifw2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vary_late_section",
+   "fieldtype": "Section Break",
+   "label": "Very Late Check-Out"
+  },
+  {
+   "fieldname": "late_section",
+   "fieldtype": "Section Break",
+   "label": "Check-Out"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_late_check_out_penalty",
+   "fieldtype": "Check",
+   "label": "Enable Late Check-Out Penalty"
+  },
+  {
+   "fieldname": "very_late_check_out_time",
+   "fieldtype": "Time",
+   "label": "Very Late Check-Out Time",
+   "mandatory_depends_on": "eval:doc.enable_very_late_check_out_penalty == true"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_very_late_check_out_penalty",
+   "fieldtype": "Check",
+   "label": "Enable Very Late Check-Out Penalty"
+  },
+  {
+   "depends_on": "eval:doc.enable_very_late_check_out_penalty == true",
+   "fieldname": "very_late_check_out_penalty",
+   "fieldtype": "Select",
+   "label": "Very Late Check-Out Penalty",
+   "mandatory_depends_on": "eval:doc.enable_very_late_check_out_penalty == true",
+   "options": "Half price of the room\nFull price of the room"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2024-08-15 09:10:49.889803",
+ "modified_by": "Administrator",
+ "module": "Room Management",
+ "name": "Room Reservation Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

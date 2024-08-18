@@ -5,6 +5,17 @@ from datetime import datetime, timedelta
 import frappe
 from frappe.model.document import Document
 
+def delete_docs_not_in_list(doctype, valid_names,parent):
+	all_docs = frappe.get_all(doctype, filters = {"room_reservation_id": parent}, fields=["child_table_id","name","reservation_date","room"])
+	for doc in all_docs:
+		if doc.child_table_id not in valid_names:
+			frappe.delete_doc(doctype, doc.name)
+			today = datetime.today().date()
+			if doc.reservation_date == today:
+				room = frappe.get_doc("Room", doc.room)
+				room.status = "Unreserved"
+				room.save()
+
 def changeRoomStatus(roomId,status):
 	doc = frappe.get_doc('Room', roomId)
 	if(status != doc.status):
@@ -12,12 +23,12 @@ def changeRoomStatus(roomId,status):
 		doc.save()
 class RoomReservation(Document):
 	def validate(self):
-		for each_child_doc in self.rooms_for_reservation:
+		for each_child_doc in self.roomsforreservation:
 			each_child_doc.before_save()
 
 	def before_save(self):
 		print("before_save")
-		for reservation in self.rooms_for_reservation:
+		for reservation in self.roomsforreservation:
 			sReservation = frappe.get_all('Single Reservations', filters={'room': reservation.room ,"reservation_date": ["between",  (reservation.starts_on, reservation.ends_on)]}, fields=['child_table_id','reservation_date'])
 			print("len: ",len(sReservation))
 			print("sReservation: ", sReservation)
@@ -32,7 +43,9 @@ class RoomReservation(Document):
 					)
 	def on_update(self):
 		print("on_update")
-		for reservation in self.rooms_for_reservation:
+		reservation_names_array = []
+		for reservation in self.roomsforreservation:
+			reservation_names_array.append(reservation.name)
 			sReservation = frappe.get_all('Single Reservations', filters={'room': reservation.room ,"reservation_date": ["between",  (reservation.starts_on, reservation.ends_on)]}, fields=['child_table_id','reservation_date'])
 			if(len(sReservation) == 0):
 				print("reservation",reservation)
@@ -58,9 +71,10 @@ class RoomReservation(Document):
 					except:
 						start += delta
 						pass
+		delete_docs_not_in_list("Single Reservations", reservation_names_array,self.name)
 	def after_insert(self):
 		print("after_insert")
-		for reservation in self.rooms_for_reservation:
+		for reservation in self.roomsforreservation:
 			print("reservation",reservation)
 			changeRoomStatus(reservation.room,"Reserved")
 			start = datetime.strptime(reservation.starts_on, '%Y-%m-%d')

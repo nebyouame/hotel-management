@@ -13,7 +13,7 @@
   "city",
   "phone_number",
   "rooms_section",
-  "rooms_for_reservation"
+  "roomsforreservation"
  ],
  "fields": [
   {
@@ -60,7 +60,7 @@
    "label": "Rooms"
   },
   {
-   "fieldname": "rooms_for_reservation",
+   "fieldname": "roomsforreservation",
    "fieldtype": "Table",
    "label": "Rooms for reservation",
    "options": "Reserved Room",
@@ -69,7 +69,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-07-20 18:20:18.663256",
+ "modified": "2024-08-16 11:07:52.978197",
  "modified_by": "Administrator",
  "module": "Room Management",
  "name": "Room Reservation",

@@ -2,18 +2,20 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on("Room Reservation", {
+
     onload: function (frm) {
-        frm.set_query("room", "rooms_for_reservation",  function (doc, cdt, cdn) {
+
+        frm.set_query("room", "roomsforreservation",  function (doc, cdt, cdn) {
             lastRow =  locals[cdt][cdn];
-            console.log("last roo ",lastRow)
-            console.log(lastRow.ends_on != undefined ,lastRow.ends_on)
-            var fromTop = doc.rooms_for_reservation.filter(r => (r.room != undefined && r.room != ""))
-            var fromTop = doc.rooms_for_reservation.filter(r => ((r.starts_on >= lastRow.starts_on && r.starts_on <= lastRow.ends_on)  || (r.starts_on <= lastRow.starts_on && r.ends_on >= lastRow.ends_on) || (r.ends_on >= lastRow.starts_on && r.ends_on <= lastRow.ends_on) )).map(r => Number(r.room))
+            // console.log("last roo ",lastRow)
+            // console.log(lastRow.ends_on != undefined ,lastRow.ends_on)
+            var fromTop = doc.roomsforreservation.filter(r => (r.room != undefined && r.room != ""))
+            var fromTop = doc.roomsforreservation.filter(r => ((r.starts_on >= lastRow.starts_on && r.starts_on <= lastRow.ends_on)  || (r.starts_on <= lastRow.starts_on && r.ends_on >= lastRow.ends_on) || (r.ends_on >= lastRow.starts_on && r.ends_on <= lastRow.ends_on) )).map(r => Number(r.room))
             let row = locals[cdt][cdn];
             var res =""
             
-            console.log("fromTop",fromTop)
-            console.log("windows",window.room)
+            // console.log("fromTop",fromTop)
+            // console.log("windows",window.room)
             if(window.room)
                 fromTop = fromTop.concat(window.room)
             fromTop = fromTop.filter((item, pos) => fromTop.indexOf(item) === pos)
@@ -24,6 +26,31 @@ frappe.ui.form.on("Room Reservation", {
                 ]
             };
         });
+    },
+    refresh: function(frm) {
+        console.log(frm.doc)
+        if(!frm.doc.__unsaved)
+        frappe.call({
+            method: "hotel_management.room_management.doctype.room_reservation.api.calculatePenalty",
+            args: {
+                rooms: frm.doc.roomsforreservation,
+            },
+            callback: function (r) {
+                if (r.message) {
+                    res = r.message
+                    // console.log("value ",res)
+                    
+                    frm.doc.roomsforreservation.forEach(function(row, idx) {
+                        if(res[row.name]){
+                        // console.log(idx)
+                        // console.log(row.name)
+                        row.penalty = res[row.name];
+                        row.total_price = (row.price*row.stay_days) + row.penalty}
+                    });
+                }
+                frm.refresh_field('roomsforreservation')
+            }
+        }); 
     }
 
 });
@@ -47,7 +74,7 @@ frappe.ui.form.on('Reserved Room', {
         callback: function (r) {
             if (r.message) {
                 res = r.message
-                console.log("value ",res)
+                // console.log("value ",res)
                 window.room = res
             }
         }
@@ -55,7 +82,7 @@ frappe.ui.form.on('Reserved Room', {
     if(lastRow.starts_on && lastRow.ends_on){
         let Difference_In_Time = new Date(lastRow.ends_on).getTime() - new Date(lastRow.starts_on).getTime();
         let Difference_In_Days = Math.round(Difference_In_Time / (1000 * 3600 * 24));
-        console.log("Difference_In_Days",Difference_In_Days)
+        // console.log("Difference_In_Days",Difference_In_Days)
         frappe.model.set_value(cdt, cdn, 'stay_days', Difference_In_Days +1);
 
     }
@@ -77,7 +104,7 @@ frappe.ui.form.on('Reserved Room', {
                 callback: function (r) {
                     if (r.message) {
                         res = r.message
-                        console.log("value ",res)
+                        // console.log("value ",res)
                         window.room = res
                     }
                 }
@@ -89,6 +116,16 @@ frappe.ui.form.on('Reserved Room', {
     
         }
     },
+    status(frm, cdt, cdn) {
+        row = locals[cdt][cdn];
+        let currentDateTime = new Date();
+        let formattedDateTime = frappe.datetime.get_datetime_as_string(currentDateTime);
+        console.log("status", row)
+        console.log("date", formattedDateTime)
+        if(frm.doc.status == "Check-in") row.check_in_time = formattedDateTime
+        if(frm.doc.status == "Check-out") row.check_in_time = formattedDateTime
+        frm.refresh_field('roomsforreservation')
+    }
 
 });
 frappe.ui.form.on('Reserved Room', {
