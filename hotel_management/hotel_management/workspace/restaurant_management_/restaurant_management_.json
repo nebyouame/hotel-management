@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"B90SfyHo9r\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Restaurant Management </span>\",\"col\":12}},{\"id\":\"zw3stEn6kO\",\"type\":\"card\",\"data\":{\"card_name\":\"Order Management\",\"col\":4}},{\"id\":\"fsdFdw1k_b\",\"type\":\"card\",\"data\":{\"card_name\":\"Menu Managment\",\"col\":4}},{\"id\":\"UwbiBXuaeF\",\"type\":\"card\",\"data\":{\"card_name\":\"Table Managment\",\"col\":4}},{\"id\":\"N9ej3n-Nlc\",\"type\":\"card\",\"data\":{\"card_name\":\"Report\",\"col\":4}}]",
+ "content": "[{\"id\":\"B90SfyHo9r\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Restaurant Management</span>\",\"col\":12}},{\"id\":\"zw3stEn6kO\",\"type\":\"card\",\"data\":{\"card_name\":\"Order Management\",\"col\":4}},{\"id\":\"fsdFdw1k_b\",\"type\":\"card\",\"data\":{\"card_name\":\"Menu Managment\",\"col\":4}},{\"id\":\"UwbiBXuaeF\",\"type\":\"card\",\"data\":{\"card_name\":\"Table Managment\",\"col\":4}},{\"id\":\"N9ej3n-Nlc\",\"type\":\"card\",\"data\":{\"card_name\":\"Report\",\"col\":4}}]",
  "creation": "2024-09-01 22:05:38.001280",
  "custom_blocks": [],
  "docstatus": 0,
