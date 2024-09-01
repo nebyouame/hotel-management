@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "field:menu",
  "creation": "2024-07-20 03:17:53.748164",
@@ -66,7 +67,7 @@
  "image_field": "image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-09-01 21:45:02.365928",
+ "modified": "2024-09-01 23:32:01.304658",
  "modified_by": "Administrator",
  "module": "Hotel Management",
  "name": "Menu",
