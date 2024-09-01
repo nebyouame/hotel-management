@@ -3,13 +3,9 @@
   {
    "chart_name": "Today's Unreserved Rooms",
    "label": "Unreserved Rooms"
-  },
-  {
-   "chart_name": "Daily Revenue",
-   "label": "Daily Revenue"
   }
  ],
- "content": "[{\"id\":\"xyUlyxcQO_\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Hotel Management</span>\",\"col\":12}},{\"id\":\"8MC7GDdNWO\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Orders\",\"col\":4}},{\"id\":\"CmMz7XhP5A\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Single Order\",\"col\":4}},{\"id\":\"iCezsenXLV\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"1iGEoKVZBL\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Room Management</b></span>\",\"col\":12}},{\"id\":\"JKNw6mbGd_\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Reservations\",\"col\":4}},{\"id\":\"oLW4uKmERe\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Rooms\",\"col\":4}},{\"id\":\"d59yfmIqiB\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Unreserved Rooms\",\"col\":6}},{\"id\":\"AqfepA8ojR\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Daily Revenue\",\"col\":6}}]",
+ "content": "[{\"id\":\"xyUlyxcQO_\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Hotel Management</span>\",\"col\":12}},{\"id\":\"8MC7GDdNWO\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Orders\",\"col\":4}},{\"id\":\"CmMz7XhP5A\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Request Order\",\"col\":4}},{\"id\":\"k-uJADJ8vn\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Report\",\"col\":4}},{\"id\":\"iCezsenXLV\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"EgXjAlKEfp\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Menu Type\",\"col\":4}},{\"id\":\"EU_HiztOyQ\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Menu\",\"col\":4}},{\"id\":\"1iGEoKVZBL\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Room Management</b></span>\",\"col\":12}},{\"id\":\"JKNw6mbGd_\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Reservations\",\"col\":4}},{\"id\":\"oLW4uKmERe\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Rooms\",\"col\":4}},{\"id\":\"d59yfmIqiB\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Unreserved Rooms\",\"col\":6}}]",
  "creation": "2024-07-19 17:15:35.037691",
  "custom_blocks": [],
  "docstatus": 0,
@@ -22,7 +18,7 @@
  "is_hidden": 0,
  "label": "Hotel Management",
  "links": [],
- "modified": "2024-07-25 20:10:06.093318",
+ "modified": "2024-09-01 07:38:02.075630",
  "modified_by": "Administrator",
  "module": "Hotel Management",
  "name": "Hotel Management",
@@ -37,13 +33,28 @@
    "quick_list_filter": "[]"
   },
   {
+   "document_type": "Single Order",
+   "label": "Request Order",
+   "quick_list_filter": "[]"
+  },
+  {
+   "document_type": "Menu Type",
+   "label": "Menu Type",
+   "quick_list_filter": "[]"
+  },
+  {
+   "document_type": "Report",
+   "label": "Report",
+   "quick_list_filter": "[[\"Report\",\"name\",\"=\",\"Addis Amba Restaurant\",false]]"
+  },
+  {
    "document_type": "Room Reservation",
    "label": "Reservations",
    "quick_list_filter": "[]"
   },
   {
-   "document_type": "Single Order",
-   "label": "Single Order",
+   "document_type": "Menu",
+   "label": "Menu",
    "quick_list_filter": "[]"
   },
   {

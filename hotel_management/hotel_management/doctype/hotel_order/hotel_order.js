@@ -1,12 +1,18 @@
 frappe.ui.form.on('Hotel Order', {
     refresh: function(frm) {
         calculateTotals(frm);
+        checkStatusForFSNumber(frm);
+        toggleFields(frm); // Call to toggle fields based on status
     },
     hotel_items_add: function(frm) {
         calculateTotals(frm);
+        checkStatusForFSNumber(frm);
+        toggleFields(frm); // Call to toggle fields after adding an item
     },
     hotel_items_remove: function(frm) {
         calculateTotals(frm);
+        checkStatusForFSNumber(frm);
+        toggleFields(frm); // Call to toggle fields after removing an item
     },
     before_save: function(frm) {
         let today = new Date();
@@ -17,10 +23,23 @@ frappe.ui.form.on('Hotel Order', {
 
         frappe.model.set_value(frm.doctype, frm.docname, 'order_date', formattedDate);
         console.log('Order date set to:', formattedDate);
+
+        // Check if fs_num is not empty and set status to 'Paid'
+        if (frm.doc.fs_num) {
+            frappe.model.set_value(frm.doctype, frm.docname, 'status', 'Paid');
+
+            frm.doc.hotel_items.forEach(function(item) {
+                if (item.status === 'Delivered') {
+                    // Set the status to Paid if it is currently Delivered
+                    frappe.model.set_value(item.doctype, item.name, 'status', 'Paid');
+                }
+            });
+        }
+        
+        
     },
     after_save: function(frm) {
         console.log('Hotel Order saved');
-
         let assigned_users = [];
 
         if (frm.doc.hotel_items) {
@@ -138,6 +157,11 @@ frappe.ui.form.on('Hotel Order', {
         } else {
             console.log('hotel_items field is undefined or null');
         }
+
+        frappe.realtime.publish('update_single_order', {
+            'hotel_order_name': frm.doc.name,
+            'status': frm.doc.status
+        });
     }
 });
 
@@ -222,49 +246,85 @@ frappe.ui.form.on('Hotel Order Item', {
                 }
             });
         }
+
+        checkStatusForFSNumber(frm);
+        toggleFields(frm); // Check and toggle fields after status change
     }
 });
+
+// Function to toggle fields based on the status
+function toggleFields(frm) {
+    frm.doc.hotel_items.forEach(function(item) {
+        let isEditable = item.status === 'Pending'; // Allow editing only if status is Pending
+        frappe.get_meta('Hotel Order Item').fields.forEach(function(field) {
+            // Lock all fields, including status
+            frm.set_df_property(field.fieldname, 'read_only', !isEditable, item.name);
+        });
+    });
+}
+
+function checkStatusForFSNumber(frm) {
+    let has_delivered = false;
+    let has_cancelled = false;
+    let has_pending_or_accepted = false;
+
+    frm.doc.hotel_items.forEach(function(item) {
+        if (item.status === "Delivered") {
+            has_delivered = true;
+        }
+        if (item.status === "Cancelled") {
+            has_cancelled = true;
+        }
+        if (item.status === "Pending" || item.status === "Accepted") {
+            has_pending_or_accepted = true;
+        }
+    });
+
+    // Check if form status is 'Paid'
+    const isPaid = frm.doc.status === 'Paid';
+
+    // Show FS Number if the form status is 'Paid'
+    // or if there are delivered items, no pending/accepted, and not all items are cancelled
+    const showFSNumber = isPaid || (has_delivered && !has_pending_or_accepted);
+
+    frm.toggle_display('fs_num', showFSNumber);
+}
 
 function calculateTotals(frm) {
     let total_qty = 0;
     let total = 0;
+    let total_vat = 0;
 
     frm.doc.hotel_items.forEach(function(item) {
         total_qty += item.qty;
         total += item.amount;
     });
 
+    total_vat = total + (total * 0.15);
+
     frappe.model.set_value(frm.doctype, frm.docname, 'total_qty', total_qty);
+    frappe.model.set_value(frm.doctype, frm.docname, 'tot_vat', total_vat);
     frappe.model.set_value(frm.doctype, frm.docname, 'total', total);
 }
 
 // Real-time updates handler
-frappe.realtime.on('status_update', (data) => {
-    if (cur_frm.doc.doctype === 'Hotel Order') {
-        if (data.doctype === 'Hotel Order Item') {
-            let hotel_order_item = cur_frm.doc.hotel_items.find(i => i.name === data.docname);
-            if (hotel_order_item) {
-                hotel_order_item.status = data.status;
-                cur_frm.refresh_field('hotel_items');
+frappe.realtime.on('update_single_order', function(data) {
+    frappe.call({
+        method: 'frappe.client.set_value',
+        args: {
+            doctype: 'Single Order',
+            name: data.hotel_order_name,
+            fieldname: 'status',
+            value: data.status
+        },
+        callback: function(r) {
+            if (!r.exc) {
                 frappe.show_alert({
-                    message: __('Hotel Order Item status updated to {0}', [data.status]),
-                    indicator: 'green',
+                    message: __('Single Order {0} status updated to {1}', [data.hotel_order_name, data.status]),
+                    indicator: 'blue',
                     persist: true
                 });
             }
         }
-    } else if (cur_frm.doc.doctype === 'Single Order') {
-        if (data.doctype === 'Single Order') {
-            let single_order = cur_frm.doc;
-            if (single_order.name === data.docname) {
-                single_order.status = data.status;
-                cur_frm.refresh_field('status');
-                frappe.show_alert({
-                    message: __('Single Order status updated to {0}', [data.status]),
-                    indicator: 'green',
-                    persist: true
-                });
-            }
-        }
-    }
+    });
 });

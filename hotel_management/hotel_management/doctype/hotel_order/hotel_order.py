@@ -22,31 +22,36 @@ class HotelOrder(Document):
         for item in self.get('hotel_items'):
             is_prepared_by_employee = frappe.db.get_value('Menu', item.item_code, 'is_prepared_by_employee')
             frappe.log_error(f"Menu: {item.item_code}, Is Prepared By Employee: {is_prepared_by_employee}, Chief: {item.chief}", "Validation Debug")
+            
             if is_prepared_by_employee and not item.chief:
                 frappe.throw(f"Please put an employee name that must prepare the {item.item_code} you just put in the menu.")
+            
+            if not is_prepared_by_employee and item.chief:
+                frappe.throw(f"Remove the employee name for the {item.item_code} because it is not marked as prepared by an employee.")
 
-@frappe.whitelist()
-def update_hotel_order_item_status(hotel_order_item_name, status):
-    frappe.db.set_value('Hotel Order Item', hotel_order_item_name, 'status', status)
-    frappe.db.commit()
 
-    frappe.publish_realtime(event='status_update', message={
-        'doctype': 'Hotel Order Item',
-        'docname': hotel_order_item_name,
-        'status': status
-    })
+# @frappe.whitelist()
+# def update_hotel_order_item_status(hotel_order_item_name, status):
+#     frappe.db.set_value('Hotel Order Item', hotel_order_item_name, 'status', status)
+#     frappe.db.commit()
 
-    # Update the corresponding Single Order
-    hotel_order_item = frappe.get_doc('Hotel Order Item', hotel_order_item_name)
-    single_order_name = frappe.db.get_value('Single Order', {'source_docname': hotel_order_item_name}, 'name')
-    if single_order_name:
-        frappe.db.set_value('Single Order', single_order_name, 'status', status)
-        frappe.db.commit()
+#     frappe.publish_realtime(event='status_update', message={
+#         'doctype': 'Hotel Order Item',
+#         'docname': hotel_order_item_name,
+#         'status': status
+#     })
 
-        frappe.publish_realtime(event='status_update', message={
-            'doctype': 'Single Order',
-            'docname': single_order_name,
-            'status': status
-        })
+#     # Update the corresponding Single Order
+#     hotel_order_item = frappe.get_doc('Hotel Order Item', hotel_order_item_name)
+#     single_order_name = frappe.db.get_value('Single Order', {'source_docname': hotel_order_item_name}, 'name')
+#     if single_order_name:
+#         frappe.db.set_value('Single Order', single_order_name, 'status', status)
+#         frappe.db.commit()
 
-    return {'status': 'success', 'message': 'Status updated and broadcasted'}
+#         frappe.publish_realtime(event='status_update', message={
+#             'doctype': 'Single Order',
+#             'docname': single_order_name,
+#             'status': status
+#         })
+
+#     return {'status': 'success', 'message': 'Status updated and broadcasted'}

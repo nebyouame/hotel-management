@@ -12,13 +12,17 @@
   "waiter",
   "column_break1",
   "order_date",
+  "fs_num",
+  "status",
   "section_break1",
+  "column_break_uqgb",
   "hotel_items",
   "section_break2",
   "total_qty",
   "column_break2",
   "total",
-  "naming_series"
+  "naming_series",
+  "tot_vat"
  ],
  "fields": [
   {
@@ -28,6 +32,7 @@
    "in_standard_filter": 1,
    "label": "Table no.",
    "options": "Table Number",
+   "read_only_depends_on": "eval:doc.status=='Paid'",
    "reqd": 1
   },
   {
@@ -37,6 +42,7 @@
    "in_standard_filter": 1,
    "label": "Waiter",
    "options": "Waiter",
+   "read_only_depends_on": "eval:doc.status=='Paid'",
    "reqd": 1
   },
   {
@@ -51,12 +57,14 @@
   {
    "fieldname": "total_qty",
    "fieldtype": "Float",
-   "label": "Total Quantity"
+   "label": "Total Quantity",
+   "read_only_depends_on": "eval:doc.status=='Paid'"
   },
   {
    "fieldname": "total",
    "fieldtype": "Currency",
-   "label": "Total(ETB)"
+   "label": "Total(ETB)",
+   "read_only_depends_on": "eval:doc.status=='Paid'"
   },
   {
    "fieldname": "column_break1",
@@ -79,6 +87,7 @@
    "fieldtype": "Table",
    "label": "Orders",
    "options": "Hotel Order Item",
+   "read_only_depends_on": "eval:doc.status=='Paid'",
    "reqd": 1
   },
   {
@@ -87,11 +96,36 @@
    "label": "Series",
    "options": "HOTEL-ORD-.YYYY.-",
    "reqd": 1
+  },
+  {
+   "default": "Unpaid",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Status",
+   "options": "Unpaid\nPaid"
+  },
+  {
+   "fieldname": "tot_vat",
+   "fieldtype": "Currency",
+   "label": "Total(ETB) including VAT",
+   "read_only_depends_on": "eval:doc.status=='Paid'"
+  },
+  {
+   "fieldname": "fs_num",
+   "fieldtype": "Int",
+   "label": "FS-Number",
+   "read_only_depends_on": "eval:doc.status=='Paid'"
+  },
+  {
+   "fieldname": "column_break_uqgb",
+   "fieldtype": "Column Break",
+   "read_only_depends_on": "eval:doc.status=='Paid'"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-07-26 03:05:19.906985",
+ "modified": "2024-09-01 09:29:35.223457",
  "modified_by": "Administrator",
  "module": "Hotel Management",
  "name": "Hotel Order",
