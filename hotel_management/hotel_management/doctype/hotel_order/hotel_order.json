@@ -125,7 +125,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-09-01 09:29:35.223457",
+ "modified": "2024-09-01 21:50:05.534159",
  "modified_by": "Administrator",
  "module": "Hotel Management",
  "name": "Hotel Order",
@@ -141,6 +141,29 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Hotel Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Reception",
    "share": 1,
    "write": 1
   }
