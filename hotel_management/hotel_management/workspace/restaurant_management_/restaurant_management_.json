@@ -11,7 +11,7 @@
  "idx": 0,
  "indicator_color": "green",
  "is_hidden": 0,
- "label": "Restaurant Management ",
+ "label": "Restaurant Management",
  "links": [
   {
    "hidden": 0,
@@ -113,7 +113,7 @@
  "modified": "2024-09-01 22:09:31.834833",
  "modified_by": "Administrator",
  "module": "Hotel Management",
- "name": "Restaurant Management ",
+ "name": "Restaurant Management",
  "number_cards": [],
  "owner": "Administrator",
  "parent_page": "",
@@ -122,5 +122,5 @@
  "roles": [],
  "sequence_id": 39.0,
  "shortcuts": [],
- "title": "Restaurant Management "
+ "title": "Restaurant Management"
 }
