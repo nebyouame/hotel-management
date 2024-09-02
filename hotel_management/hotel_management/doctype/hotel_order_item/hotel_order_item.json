@@ -10,6 +10,7 @@
   "item_code",
   "qty",
   "chief",
+  "rate_vat",
   "rate",
   "amount",
   "status"
@@ -68,12 +69,17 @@
    "options": "Menu",
    "read_only_depends_on": "eval:doc.status!='Pending'",
    "reqd": 1
+  },
+  {
+   "fieldname": "rate_vat",
+   "fieldtype": "Currency",
+   "label": "Rate Excluding VAT"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-09-01 09:40:22.322623",
+ "modified": "2024-09-02 03:26:09.240008",
  "modified_by": "Administrator",
  "module": "Hotel Management",
  "name": "Hotel Order Item",
