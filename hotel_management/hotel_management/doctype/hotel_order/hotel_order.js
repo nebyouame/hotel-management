@@ -185,7 +185,7 @@ frappe.ui.form.on('Hotel Order Item', {
                     frappe.model.set_value(cdt, cdn, 'rate', rate);
                     let amount = row.qty * rate;
                     frappe.model.set_value(cdt, cdn, 'amount', amount);
-                    let rate_vat = (rate - (rate * 0.15));
+                    let rate_vat = (rate - ((rate * 0.15) / 1.15));
                     frappe.model.set_value(cdt, cdn, 'rate_vat', rate_vat);
                 } else {
                     frappe.model.set_value(cdt, cdn, 'rate', 0);
@@ -302,7 +302,7 @@ function calculateTotals(frm) {
         total += item.amount;
     });
 
-    total_vat = total - (total * 0.15);
+    total_vat = total - ((total * 0.15) / 1.15);
 
     frappe.model.set_value(frm.doctype, frm.docname, 'total_qty', total_qty);
     frappe.model.set_value(frm.doctype, frm.docname, 'tot_vat', total);
