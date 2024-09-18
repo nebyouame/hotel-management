@@ -79,7 +79,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-08-15 09:10:49.889803",
+ "modified": "2024-08-31 08:33:10.784295",
  "modified_by": "Administrator",
  "module": "Room Management",
  "name": "Room Reservation Settings",
@@ -92,6 +92,16 @@
    "print": 1,
    "read": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Hotel Admin",
    "share": 1,
    "write": 1
   }

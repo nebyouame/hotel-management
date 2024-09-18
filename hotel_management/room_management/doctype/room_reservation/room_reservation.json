@@ -12,8 +12,16 @@
   "column_break_yehr",
   "city",
   "phone_number",
+  "status",
   "rooms_section",
-  "roomsforreservation"
+  "roomsforreservation",
+  "room_number",
+  "payment_section",
+  "payment_list",
+  "column_break_gpmt",
+  "total",
+  "paid",
+  "remaining"
  ],
  "fields": [
   {
@@ -25,13 +33,13 @@
    "fieldname": "first_name",
    "fieldtype": "Data",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "First Name",
    "reqd": 1
   },
   {
    "fieldname": "last_name",
    "fieldtype": "Data",
-   "in_list_view": 1,
    "label": "Last Name",
    "reqd": 1
   },
@@ -65,11 +73,65 @@
    "label": "Rooms for reservation",
    "options": "Reserved Room",
    "reqd": 1
+  },
+  {
+   "fieldname": "room_number",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "in_standard_filter": 1,
+   "label": "Room Number",
+   "print_hide": 1,
+   "read_only": 1,
+   "report_hide": 1
+  },
+  {
+   "depends_on": "eval:doc.__islocal != 1",
+   "fieldname": "payment_section",
+   "fieldtype": "Section Break",
+   "label": "Payment"
+  },
+  {
+   "fieldname": "payment_list",
+   "fieldtype": "Table",
+   "label": "Payment List",
+   "options": "Room Payment"
+  },
+  {
+   "fieldname": "column_break_gpmt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Unpaid",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Unpaid\nPaid"
+  },
+  {
+   "fieldname": "total",
+   "fieldtype": "Currency",
+   "label": "Total",
+   "read_only": 1
+  },
+  {
+   "fieldname": "paid",
+   "fieldtype": "Currency",
+   "label": "Paid",
+   "read_only": 1
+  },
+  {
+   "fieldname": "remaining",
+   "fieldtype": "Currency",
+   "ignore_user_permissions": 1,
+   "label": "Remaining"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-16 11:07:52.978197",
+ "modified": "2024-08-31 08:32:42.495805",
  "modified_by": "Administrator",
  "module": "Room Management",
  "name": "Room Reservation",
@@ -87,9 +149,33 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Reception",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Hotel Admin",
+   "share": 1,
+   "write": 1
   }
  ],
  "sort_field": "creation",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "track_changes": 1
 }

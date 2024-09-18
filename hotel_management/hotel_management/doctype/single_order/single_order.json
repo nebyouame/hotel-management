@@ -3,7 +3,7 @@
  "allow_rename": 1,
  "autoname": "format:{quantity} {menu}-------------{source_docname}",
  "creation": "2024-07-16 19:34:13.246612",
- "default_view": "Image",
+ "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -96,11 +96,10 @@
    "label": "image"
   }
  ],
- "force_re_route_to_default_view": 1,
  "image_field": "image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-09-01 21:49:08.247160",
+ "modified": "2024-09-04 08:54:33.741511",
  "modified_by": "Administrator",
  "module": "Hotel Management",
  "name": "Single Order",

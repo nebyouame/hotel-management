@@ -23,8 +23,39 @@ def changeRoomStatus(roomId,status):
 		doc.save()
 class RoomReservation(Document):
 	def validate(self):
+		reservation_total_payment = 0
+		reservation_total_paid_amount = 0
+		reservation_total_paymentEach = {}
+		reservation_total_paid_amountEach = {}
 		for each_child_doc in self.roomsforreservation:
 			each_child_doc.before_save()
+			print("each_child_doc",each_child_doc.total_price)
+			reservation_total_payment += each_child_doc.total_price
+			reservation_total_paymentEach[each_child_doc.name] = each_child_doc.total_price
+		for each_child_doc in self.payment_list:
+			each_child_doc.before_save()
+			print("each_child_doc_payment",each_child_doc.amount)
+			reservation_total_paid_amount += each_child_doc.amount
+			room_name = each_child_doc.room
+			if room_name in reservation_total_paid_amountEach:
+				reservation_total_paid_amountEach[room_name] += each_child_doc.amount
+			else:
+				reservation_total_paid_amountEach[room_name] = each_child_doc.amount
+		print("reservation_total_paid_amountEach: ",reservation_total_paid_amountEach)
+		print("reservation_total_paymentEach: ",reservation_total_paymentEach)
+		for key, value in reservation_total_paymentEach.items():
+			if value < reservation_total_paid_amountEach[key]:
+				frappe.throw(
+						title='Error',
+						msg=f"Payment for {key} is more than the actual price. actual price {value} added price {reservation_total_paid_amountEach[key]}",
+					)
+		self.total = reservation_total_payment
+		self.paid = reservation_total_paid_amount
+		self.remaining = reservation_total_payment - reservation_total_paid_amount
+		if self.remaining:
+			self.status = "Unpaid" 
+		else:
+			self.status ="Paid"
 
 	def before_save(self):
 		print("before_save")

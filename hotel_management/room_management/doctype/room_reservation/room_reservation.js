@@ -23,32 +23,52 @@ frappe.ui.form.on("Room Reservation", {
                 "filters": [
                     ["Room","type", "=", row.type],
                     ["Room","room_number", "not in", fromTop],
+                    ["Room","status", "=", "Unreserved"],
                 ]
+            };
+        });
+        frm.set_query("room", "payment_list",  function (doc, cdt, cdn) {
+            lastRow =  locals[cdt][cdn];
+            return {
+                filters: {
+                    'parent': frm.doc.name  
+                }
             };
         });
     },
     refresh: function(frm) {
         console.log(frm.doc)
+        // let rooms_for_filter = frm.doc.roomsforreservation.map(reservation => reservation.room);
+        // frm.set_value('room_number', rooms_for_filter.join());
         if(!frm.doc.__unsaved)
         frappe.call({
             method: "hotel_management.room_management.doctype.room_reservation.api.calculatePenalty",
             args: {
                 rooms: frm.doc.roomsforreservation,
+                reservation_id: frm.doc.name,
             },
             callback: function (r) {
                 if (r.message) {
                     res = r.message
                     // console.log("value ",res)
-                    
+                    var reservation_total_payment = 0
+		            var reservation_total_paid_amount = 0
                     frm.doc.roomsforreservation.forEach(function(row, idx) {
                         if(res[row.name]){
-                        // console.log(idx)
-                        // console.log(row.name)
-                        row.penalty = res[row.name];
-                        row.total_price = (row.price*row.stay_days) + row.penalty}
+                            // console.log(row.name)
+                            row.penalty = res[row.name];
+                            row.stay_days = res[`${row.name}stay_days`];
+                            console.log("row.stay_days ",row.stay_days)
+                            row.total_price = (row.price*row.stay_days) + row.penalty
+                        }
+                        reservation_total_payment += row.total_price
+                        console.log("row.total_price: ", row.total_price)
                     });
+                    console.log("reservation_total_payment: ", reservation_total_payment)
+                    frm.set_value('total', reservation_total_payment);
                 }
                 frm.refresh_field('roomsforreservation')
+                frm.save()
             }
         }); 
     }
@@ -134,6 +154,8 @@ frappe.ui.form.on('Reserved Room', {
         frappe.model.set_value(cdt, cdn, 'room', "");
     },
     room: function (frm, cdt, cdn) {
+        let rooms_for_filter = frm.doc.roomsforreservation.map(reservation => reservation.room);
+        frm.set_value('room_number', rooms_for_filter.join());
         let row = locals[cdt][cdn];
         if(row.room !="")
         frappe.call({
@@ -151,6 +173,11 @@ frappe.ui.form.on('Reserved Room', {
             }
         });
     },
+    room_remove: function (frm, cdt, cdn) {
+        console.log("remove")
+        let rooms_for_filter = frm.doc.roomsforreservation.map(reservation => reservation.room);
+        frm.set_value('room_number', rooms_for_filter.join());
+    },
     price: function (frm, cdt, cdn) {
         let row = locals[cdt][cdn];
         if (row.price && row.stay_days)
@@ -162,4 +189,39 @@ frappe.ui.form.on('Reserved Room', {
             frappe.model.set_value(cdt, cdn, 'total_price', row.price*row.stay_days);
     },
     
+});
+
+
+
+frappe.ui.form.on('Room Payment', {
+    room: function (frm, cdt, cdn) {
+        let row = locals[cdt][cdn];
+        let room = frm.doc.roomsforreservation.find(r => r.name == row.room)
+        console.log("room: ", room)
+        if(row.add_penalty){
+            frappe.model.set_value(cdt, cdn, 'amount', (row.days * room.price) + room.penalty);
+        } else {
+            frappe.model.set_value(cdt, cdn, 'amount', row.days * room.price);
+        }
+    },
+    days: function (frm, cdt, cdn) {
+        let row = locals[cdt][cdn];
+        let room = frm.doc.roomsforreservation.find(r => r.name == row.room)
+        console.log("room: ", room)
+        if(row.add_penalty){
+            frappe.model.set_value(cdt, cdn, 'amount', (row.days * room.price) + room.penalty);
+        } else {
+            frappe.model.set_value(cdt, cdn, 'amount', row.days * room.price);
+        }
+    },
+    add_penalty: function (frm, cdt, cdn) {
+        let row = locals[cdt][cdn];
+        let room = frm.doc.roomsforreservation.find(r => r.name == row.room)
+        console.log("room: ", room)
+        if(row.add_penalty){
+            frappe.model.set_value(cdt, cdn, 'amount', (row.days * room.price) + room.penalty);
+        } else {
+            frappe.model.set_value(cdt, cdn, 'amount', row.days * room.price);
+        }
+    },
 });

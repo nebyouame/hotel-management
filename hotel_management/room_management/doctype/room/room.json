@@ -73,7 +73,7 @@
    "link_fieldname": "room"
   }
  ],
- "modified": "2024-08-17 05:31:40.991411",
+ "modified": "2024-08-31 08:32:31.656047",
  "modified_by": "Administrator",
  "module": "Room Management",
  "name": "Room",
@@ -89,6 +89,29 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Reception",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Hotel Admin",
    "share": 1,
    "write": 1
   }

@@ -6,6 +6,11 @@ class HotelOrder(Document):
     def validate(self):
         self.calculate_totals()
         self.validate_chief_for_menu()
+        print("validate_s")
+        frappe.publish_realtime('update_single_order', {
+        'status': self.status
+        })
+        frappe.publish_progress(50,"my progress")
 
     def calculate_totals(self):
         total_qty = 0

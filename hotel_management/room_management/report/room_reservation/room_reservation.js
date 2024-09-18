@@ -1,10 +1,9 @@
-// Copyright (c) 2024, Powerware Technologies and contributors
+// Copyright (c) 2024, Powerware Tecnologies  and contributors
 // For license information, please see license.txt
-/* eslint-disable */
 
-frappe.query_reports["Restaurant Order"] = {
-    "filters": [
-        {
+frappe.query_reports["Room Reservation"] = {
+	"filters": [
+		{
             "fieldname": "from_date",
             "label": __("From Date"),
             "fieldtype": "Date",
@@ -22,5 +21,5 @@ frappe.query_reports["Restaurant Order"] = {
         //     "fieldtype": "Link",
         //     "options": "Menu Type"
         // }
-    ]
+	]
 };
