@@ -20,8 +20,11 @@ class HotelOrder(Document):
             total_qty += item.qty
             total += item.amount
 
+        total_vat = total - ((total * 0.15) / 1.15)
+
         self.total_qty = total_qty
-        self.total = total
+        self.tot_vat = total
+        self.total = total_vat
 
     def validate_chief_for_menu(self):
         for item in self.get('hotel_items'):
@@ -34,29 +37,3 @@ class HotelOrder(Document):
             if not is_prepared_by_employee and item.chief:
                 frappe.throw(f"Remove the employee name for the {item.item_code} because it is not marked as prepared by an employee.")
 
-
-# @frappe.whitelist()
-# def update_hotel_order_item_status(hotel_order_item_name, status):
-#     frappe.db.set_value('Hotel Order Item', hotel_order_item_name, 'status', status)
-#     frappe.db.commit()
-
-#     frappe.publish_realtime(event='status_update', message={
-#         'doctype': 'Hotel Order Item',
-#         'docname': hotel_order_item_name,
-#         'status': status
-#     })
-
-#     # Update the corresponding Single Order
-#     hotel_order_item = frappe.get_doc('Hotel Order Item', hotel_order_item_name)
-#     single_order_name = frappe.db.get_value('Single Order', {'source_docname': hotel_order_item_name}, 'name')
-#     if single_order_name:
-#         frappe.db.set_value('Single Order', single_order_name, 'status', status)
-#         frappe.db.commit()
-
-#         frappe.publish_realtime(event='status_update', message={
-#             'doctype': 'Single Order',
-#             'docname': single_order_name,
-#             'status': status
-#         })
-
-#     return {'status': 'success', 'message': 'Status updated and broadcasted'}

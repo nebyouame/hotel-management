@@ -1,43 +1,40 @@
 frappe.ui.form.on('Hotel Order', {
-    refresh: function(frm) {
-        calculateTotals(frm);
+    onload: function(frm) {
         checkStatusForFSNumber(frm);
-        toggleFields(frm); // Call to toggle fields based on status
+        toggleFields(frm);
     },
     hotel_items_add: function(frm) {
         calculateTotals(frm);
         checkStatusForFSNumber(frm);
-        toggleFields(frm); // Call to toggle fields after adding an item
+        toggleFields(frm); 
     },
     hotel_items_remove: function(frm) {
         calculateTotals(frm);
         checkStatusForFSNumber(frm);
-        toggleFields(frm); // Call to toggle fields after removing an item
+        toggleFields(frm); 
     },
     before_save: function(frm) {
-        let today = new Date();
-        let day = String(today.getDate()).padStart(2, '0');
-        let month = String(today.getMonth() + 1).padStart(2, '0');
-        let year = today.getFullYear();
-        let formattedDate = year + '-' + month + '-' + day;
-
-        frappe.model.set_value(frm.doctype, frm.docname, 'order_date', formattedDate);
-        console.log('Order date set to:', formattedDate);
-
-        // Check if fs_num is not empty and set status to 'Paid'
-        if (frm.doc.fs_num) {
-            frappe.model.set_value(frm.doctype, frm.docname, 'status', 'Paid');
-
-            frm.doc.hotel_items.forEach(function(item) {
-                if (item.status === 'Delivered') {
-                    // Set the status to Paid if it is currently Delivered
-                    frappe.model.set_value(item.doctype, item.name, 'status', 'Paid');
-                }
-            });
+        try {
+            let today = new Date();
+            let formattedDate = today.toISOString().split('T')[0]; 
+    
+            frappe.model.set_value(frm.doctype, frm.docname, 'order_date', formattedDate);
+            console.log('Order date set to:', formattedDate);
+    
+            if (frm.doc.fs_num) {
+                frappe.model.set_value(frm.doctype, frm.docname, 'status', 'Paid');
+                frm.doc.hotel_items.forEach(function(item) {
+                    if (item.status === 'Delivered') {
+                        frappe.model.set_value(item.doctype, item.name, 'status', 'Paid');
+                    }
+                });
+            }
+        } catch (error) {
+            console.error('Error in before_save:', error);
+            frappe.msgprint(__('Error during save: {0}', [error.message]));
         }
-        
-        
     },
+    
     after_save: function(frm) {
         console.log('Hotel Order saved');
         let assigned_users = [];
@@ -259,7 +256,7 @@ function toggleFields(frm) {
     frm.doc.hotel_items.forEach(function(item) {
         let isEditable = item.status === 'Pending'; // Allow editing only if status is Pending
         frappe.get_meta('Hotel Order Item').fields.forEach(function(field) {
-            // Lock all fields, including status
+            
             frm.set_df_property(field.fieldname, 'read_only', !isEditable, item.name);
         });
     });
@@ -281,35 +278,29 @@ function checkStatusForFSNumber(frm) {
             has_pending_or_accepted = true;
         }
     });
-
-    // Check if form status is 'Paid'
     const isPaid = frm.doc.status === 'Paid';
 
-    // Show FS Number if the form status is 'Paid'
-    // or if there are delivered items, no pending/accepted, and not all items are cancelled
     const showFSNumber = isPaid || (has_delivered && !has_pending_or_accepted);
 
     frm.toggle_display('fs_num', showFSNumber);
 }
 
 function calculateTotals(frm) {
-    let total_qty = 0;
-    let total = 0;
-    let total_vat = 0;
+    let totalQty = 0, total = 0, totalVat = 0;
 
     frm.doc.hotel_items.forEach(function(item) {
-        total_qty += item.qty;
+        totalQty += item.qty;
         total += item.amount;
     });
 
-    total_vat = total - ((total * 0.15) / 1.15);
+    totalVat = total - ((total * 0.15) / 1.15);
 
-    frappe.model.set_value(frm.doctype, frm.docname, 'total_qty', total_qty);
+    frappe.model.set_value(frm.doctype, frm.docname, 'total_qty', totalQty);
     frappe.model.set_value(frm.doctype, frm.docname, 'tot_vat', total);
-    frappe.model.set_value(frm.doctype, frm.docname, 'total', total_vat);
+    frappe.model.set_value(frm.doctype, frm.docname, 'total', totalVat);
 }
 
-// Real-time updates handler
+
 frappe.realtime.on('update_single_order', function(data) {
     frappe.call({
         method: 'frappe.client.set_value',

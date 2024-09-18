@@ -1,0 +1,69 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2024-09-17 00:24:34.561371",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date",
+   "mandatory": 0,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date",
+   "mandatory": 0,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "menu",
+   "fieldtype": "Link",
+   "label": "Menu",
+   "mandatory": 0,
+   "options": "Menu",
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "menu_type",
+   "fieldtype": "Link",
+   "label": "Menu Type",
+   "mandatory": 0,
+   "options": "Menu Type",
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "paid_by",
+   "fieldtype": "Link",
+   "label": "Paid By",
+   "mandatory": 0,
+   "options": "User",
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "ord_status",
+   "fieldtype": "Select",
+   "label": "Order Status",
+   "mandatory": 0,
+   "options": "\nUnpaid\nPaid",
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letterhead": null,
+ "modified": "2024-09-17 00:24:34.561371",
+ "modified_by": "Administrator",
+ "module": "Hotel Management",
+ "name": "Addis Amba Hotel",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Hotel Order",
+ "report_name": "Addis Amba Hotel",
+ "report_type": "Script Report",
+ "roles": []
+}
