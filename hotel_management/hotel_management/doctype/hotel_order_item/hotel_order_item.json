@@ -73,13 +73,15 @@
   {
    "fieldname": "rate_vat",
    "fieldtype": "Currency",
-   "label": "Rate Excluding VAT"
+   "in_list_view": 1,
+   "label": "Rate Excluding VAT",
+   "read_only_depends_on": "eval:doc.status!='Pending'"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-09-02 03:26:09.240008",
+ "modified": "2024-09-07 21:28:53.988079",
  "modified_by": "Administrator",
  "module": "Hotel Management",
  "name": "Hotel Order Item",
