@@ -1,0 +1,126 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"B90SfyHo9r\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Restaurant Management </span>\",\"col\":12}},{\"id\":\"zw3stEn6kO\",\"type\":\"card\",\"data\":{\"card_name\":\"Order Management\",\"col\":4}},{\"id\":\"fsdFdw1k_b\",\"type\":\"card\",\"data\":{\"card_name\":\"Menu Managment\",\"col\":4}},{\"id\":\"UwbiBXuaeF\",\"type\":\"card\",\"data\":{\"card_name\":\"Table Managment\",\"col\":4}},{\"id\":\"N9ej3n-Nlc\",\"type\":\"card\",\"data\":{\"card_name\":\"Report\",\"col\":4}}]",
+ "creation": "2024-09-01 22:05:38.001280",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "retail",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "Restaurant Management",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Order Management",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Order",
+   "link_count": 0,
+   "link_to": "Hotel Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Requested Order",
+   "link_count": 0,
+   "link_to": "Single Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Menu Managment",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Menu Type",
+   "link_count": 0,
+   "link_to": "Menu Type",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Menu",
+   "link_count": 0,
+   "link_to": "Menu",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Table Managment",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Table Number",
+   "link_count": 0,
+   "link_to": "Table Number",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Report",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Restaurant Report",
+   "link_count": 0,
+   "link_to": "Addis Amba Hotel",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2024-09-17 02:17:20.265742",
+ "modified_by": "Administrator",
+ "module": "Hotel Management",
+ "name": "Restaurant Management",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 39.0,
+ "shortcuts": [],
+ "title": "Restaurant Management"
+}

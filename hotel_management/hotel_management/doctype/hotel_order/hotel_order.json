@@ -102,6 +102,9 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "hidden": 1,
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Status",
    "options": "Unpaid\nPaid"
   },
@@ -125,7 +128,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-09-01 21:50:05.534159",
+ "modified": "2024-09-18 02:35:22.883980",
  "modified_by": "Administrator",
  "module": "Hotel Management",
  "name": "Hotel Order",

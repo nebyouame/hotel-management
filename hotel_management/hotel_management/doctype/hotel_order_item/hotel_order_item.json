@@ -41,7 +41,6 @@
    "in_list_view": 1,
    "label": "Status ",
    "options": "Pending\nAccepted\nDelivered\nCancelled\nPaid",
-   "read_only_depends_on": "eval:doc.status!='Pending'",
    "reqd": 1
   },
   {
@@ -81,7 +80,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-09-07 21:28:53.988079",
+ "modified": "2024-09-18 23:53:04.222325",
  "modified_by": "Administrator",
  "module": "Hotel Management",
  "name": "Hotel Order Item",
