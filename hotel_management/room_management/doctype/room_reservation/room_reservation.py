@@ -31,7 +31,8 @@ class RoomReservation(Document):
 			each_child_doc.before_save()
 			print("each_child_doc",each_child_doc.total_price)
 			reservation_total_payment += each_child_doc.total_price
-			reservation_total_paymentEach[each_child_doc.name] = each_child_doc.total_price
+			if not each_child_doc.is_new():
+				reservation_total_paymentEach[each_child_doc.name] = each_child_doc.total_price
 		for each_child_doc in self.payment_list:
 			each_child_doc.before_save()
 			print("each_child_doc_payment",each_child_doc.amount)
@@ -43,12 +44,13 @@ class RoomReservation(Document):
 				reservation_total_paid_amountEach[room_name] = each_child_doc.amount
 		print("reservation_total_paid_amountEach: ",reservation_total_paid_amountEach)
 		print("reservation_total_paymentEach: ",reservation_total_paymentEach)
-		for key, value in reservation_total_paymentEach.items():
-			if value < reservation_total_paid_amountEach[key]:
-				frappe.throw(
-						title='Error',
-						msg=f"Payment for {key} is more than the actual price. actual price {value} added price {reservation_total_paid_amountEach[key]}",
-					)
+		if not self.is_new():
+			for key, value in reservation_total_paymentEach.items():
+					if value < reservation_total_paid_amountEach[key]:
+						frappe.throw(
+								title='Error',
+								msg=f"Payment for {key} is more than the actual price. actual price {value} added price {reservation_total_paid_amountEach[key]}",
+							)
 		self.total = reservation_total_payment
 		self.paid = reservation_total_paid_amount
 		self.remaining = reservation_total_payment - reservation_total_paid_amount
