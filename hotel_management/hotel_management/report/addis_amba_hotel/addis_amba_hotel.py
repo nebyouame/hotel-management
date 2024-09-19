@@ -19,9 +19,9 @@ def execute(filters=None):
     
     # Apply filters
     if filters.get("from_date"):
-        conditions += " AND h.order_date >= %(from_date)s"
+        conditions += " AND h.creation >= %(from_date)s"
     if filters.get("to_date"):
-        conditions += " AND h.order_date <= %(to_date)s"
+        conditions += " AND h.creation <= %(to_date)s"
     if filters.get("ord_status"):
         conditions += " AND h.status = %(ord_status)s"
     
