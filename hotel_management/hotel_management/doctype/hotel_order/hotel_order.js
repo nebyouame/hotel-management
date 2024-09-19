@@ -301,23 +301,23 @@ function calculateTotals(frm) {
 }
 
 
-frappe.realtime.on('update_single_order', function(data) {
-    frappe.call({
-        method: 'frappe.client.set_value',
-        args: {
-            doctype: 'Single Order',
-            name: data.hotel_order_name,
-            fieldname: 'status',
-            value: data.status
-        },
-        callback: function(r) {
-            if (!r.exc) {
-                frappe.show_alert({
-                    message: __('Single Order {0} status updated to {1}', [data.hotel_order_name, data.status]),
-                    indicator: 'blue',
-                    persist: true
-                });
-            }
-        }
-    });
-});
+// frappe.realtime.on('update_single_order', function(data) {
+//     frappe.call({
+//         method: 'frappe.client.set_value',
+//         args: {
+//             doctype: 'Single Order',
+//             name: data.hotel_order_name,
+//             fieldname: 'status',
+//             value: data.status
+//         },
+//         callback: function(r) {
+//             if (!r.exc) {
+//                 frappe.show_alert({
+//                     message: __('Single Order {0} status updated to {1}', [data.hotel_order_name, data.status]),
+//                     indicator: 'blue',
+//                     persist: true
+//                 });
+//             }
+//         }
+//     });
+// });
