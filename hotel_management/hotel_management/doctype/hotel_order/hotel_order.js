@@ -15,6 +15,12 @@ frappe.ui.form.on('Hotel Order', {
     },
     before_save: function(frm) {
         try {
+            let today = new Date();
+            let formattedDate = today.toISOString().split('T')[0]; 
+    
+            frappe.model.set_value(frm.doctype, frm.docname, 'order_date', formattedDate);
+            console.log('Order date set to:', formattedDate);
+    
             if (frm.doc.fs_num) {
                 frappe.model.set_value(frm.doctype, frm.docname, 'status', 'Paid');
                 frm.doc.hotel_items.forEach(function(item) {
@@ -30,8 +36,6 @@ frappe.ui.form.on('Hotel Order', {
     },
     
     after_save: function(frm) {
-        frm.set_value('order_date', frm.doc.creation)
-        console.log('Order date set to:', frm.doc.creation);
         console.log('Hotel Order saved');
         let assigned_users = [];
 
