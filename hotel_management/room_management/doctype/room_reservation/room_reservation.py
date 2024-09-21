@@ -38,19 +38,23 @@ class RoomReservation(Document):
 			print("each_child_doc_payment",each_child_doc.amount)
 			reservation_total_paid_amount += each_child_doc.amount
 			room_name = each_child_doc.room
-			if room_name in reservation_total_paid_amountEach:
-				reservation_total_paid_amountEach[room_name] += each_child_doc.amount
+			if room_name.split(" /")[0] in reservation_total_paid_amountEach:
+				print("room_name.split[0] TRUE: ",room_name.split(" /")[0])
+				reservation_total_paid_amountEach[room_name.split(" /")[0]] += each_child_doc.amount
 			else:
-				reservation_total_paid_amountEach[room_name] = each_child_doc.amount
+				reservation_total_paid_amountEach[room_name.split(" /")[0]] = each_child_doc.amount
 		print("reservation_total_paid_amountEach: ",reservation_total_paid_amountEach)
 		print("reservation_total_paymentEach: ",reservation_total_paymentEach)
 		if not self.is_new():
 			for key, value in reservation_total_paymentEach.items():
-					if value < reservation_total_paid_amountEach[key]:
-						frappe.throw(
-								title='Error',
-								msg=f"Payment for {key} is more than the actual price. actual price {value} added price {reservation_total_paid_amountEach[key]}",
-							)
+					if len(reservation_total_paid_amountEach):
+						print("value: ",value)
+						print("reservation_total_paid_amountEach: ",reservation_total_paid_amountEach[key])
+						if value < reservation_total_paid_amountEach[key]:
+							frappe.throw(
+									title='Error',
+									msg=f"Payment for {key} is more than the actual price. actual price {value} added price {reservation_total_paid_amountEach[key]}",
+								)
 		self.total = reservation_total_payment
 		self.paid = reservation_total_paid_amount
 		self.remaining = reservation_total_payment - reservation_total_paid_amount
@@ -86,9 +90,7 @@ class RoomReservation(Document):
 				start = datetime.strptime(reservation.starts_on, '%Y-%m-%d')
 				ends_on = datetime.strptime(reservation.ends_on, '%Y-%m-%d')
 				delta = timedelta(days=1)
-				while start <= ends_on:
-					try:
-						single_r = frappe.get_doc(
+				single_r = frappe.get_doc(
 							{
 								"doctype": "Single Reservations",
 								"type": reservation.type,
@@ -98,12 +100,26 @@ class RoomReservation(Document):
 								"child_table_id": reservation.name,
 							}
 						)
-						data = single_r.insert()
-						frappe.db.commit()
-						start += delta
-					except:
-						start += delta
-						pass
+				data = single_r.insert()
+				frappe.db.commit()
+				# while start <= ends_on:
+				# 	try:
+				# 		single_r = frappe.get_doc(
+				# 			{
+				# 				"doctype": "Single Reservations",
+				# 				"type": reservation.type,
+				# 				"room": reservation.room,
+				# 				"price": reservation.price,
+				# 				"reservation_date": start,
+				# 				"child_table_id": reservation.name,
+				# 			}
+				# 		)
+				# 		data = single_r.insert()
+				# 		frappe.db.commit()
+				# 		start += delta
+				# 	except:
+				# 		start += delta
+				# 		pass
 		delete_docs_not_in_list("Single Reservations", reservation_names_array,self.name)
 	def after_insert(self):
 		print("after_insert")
@@ -113,9 +129,7 @@ class RoomReservation(Document):
 			start = datetime.strptime(reservation.starts_on, '%Y-%m-%d')
 			ends_on = datetime.strptime(reservation.ends_on, '%Y-%m-%d')
 			delta = timedelta(days=1)
-			while start <= ends_on:
-				try:
-					single_r = frappe.get_doc(
+			single_r = frappe.get_doc(
 						{
 							"doctype": "Single Reservations",
 							"type": reservation.type,
@@ -126,9 +140,24 @@ class RoomReservation(Document):
 							"child_table_id": reservation.name,
 						}
 					)
-					data = single_r.insert()
-					frappe.db.commit()
-					start += delta
-				except:
-					start += delta
-					pass
+			data = single_r.insert()
+			frappe.db.commit()
+			# while start <= ends_on:
+			# 	try:
+			# 		single_r = frappe.get_doc(
+			# 			{
+			# 				"doctype": "Single Reservations",
+			# 				"type": reservation.type,
+			# 				"room": reservation.room,
+			# 				"price": reservation.price,
+			# 				"reservation_date": start,
+			# 				# "room_reservation_id": reservation._parent_doc,
+			# 				"child_table_id": reservation.name,
+			# 			}
+			# 		)
+			# 		data = single_r.insert()
+			# 		frappe.db.commit()
+			# 		start += delta
+			# 	except:
+			# 		start += delta
+			# 		pass

@@ -16,5 +16,6 @@ class ReservedRoom(Document):
 		if self.status == "Check-out" and self.check_out_time == None:
 			self.check_out_time = now_datetime()
 			frappe.db.set_value("Room",self.room,"status","Unreserved")
+			frappe.db.set_value("Single Reservations",self.room,"status","Check-out")
 
 		

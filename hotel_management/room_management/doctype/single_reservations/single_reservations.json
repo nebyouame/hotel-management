@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format: {child_table_id} / {##}",
  "creation": "2024-07-18 14:16:12.061213",
  "default_view": "List",
  "doctype": "DocType",
@@ -14,7 +15,8 @@
   "column_break_qgww",
   "reservation_date",
   "room_reservation_id",
-  "child_table_id"
+  "child_table_id",
+  "status"
  ],
  "fields": [
   {
@@ -73,16 +75,22 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Room Reservation Id",
-   "options": "Room Reservation",
-   "reqd": 1,
-   "set_only_once": 1
+   "options": "Room Reservation"
+  },
+  {
+   "default": "Check-in",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Check-in\nCheck-out"
   }
  ],
  "links": [],
- "modified": "2024-08-31 08:32:21.431164",
+ "modified": "2024-09-21 13:40:21.968726",
  "modified_by": "Administrator",
  "module": "Room Management",
  "name": "Single Reservations",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

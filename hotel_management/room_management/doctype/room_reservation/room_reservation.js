@@ -9,7 +9,7 @@ frappe.ui.form.on("Room Reservation", {
             lastRow =  locals[cdt][cdn];
             // console.log("last roo ",lastRow)
             // console.log(lastRow.ends_on != undefined ,lastRow.ends_on)
-            var fromTop = doc.roomsforreservation.filter(r => (r.room != undefined && r.room != ""))
+            var fromTop = doc.roomsforreservation.filter(r => (r.room != undefined && r.room != "" && r.status != "Check-out"))
             var fromTop = doc.roomsforreservation.filter(r => ((r.starts_on >= lastRow.starts_on && r.starts_on <= lastRow.ends_on)  || (r.starts_on <= lastRow.starts_on && r.ends_on >= lastRow.ends_on) || (r.ends_on >= lastRow.starts_on && r.ends_on <= lastRow.ends_on) )).map(r => Number(r.room))
             let row = locals[cdt][cdn];
             var res =""
@@ -27,11 +27,12 @@ frappe.ui.form.on("Room Reservation", {
                 ]
             };
         });
+        
         frm.set_query("room", "payment_list",  function (doc, cdt, cdn) {
             lastRow =  locals[cdt][cdn];
             return {
                 filters: {
-                    'parent': frm.doc.name  
+                    'room_reservation_id': frm.doc.name  
                 }
             };
         });
@@ -196,7 +197,9 @@ frappe.ui.form.on('Reserved Room', {
 frappe.ui.form.on('Room Payment', {
     room: function (frm, cdt, cdn) {
         let row = locals[cdt][cdn];
-        let room = frm.doc.roomsforreservation.find(r => r.name == row.room)
+        let splits = row.room.split(" /")[0]
+        console.log("new split",splits)
+        let room = frm.doc.roomsforreservation.find(r => r.name ==  splits)
         console.log("room: ", room)
         if(row.add_penalty){
             frappe.model.set_value(cdt, cdn, 'amount', (row.days * room.price) + room.penalty);

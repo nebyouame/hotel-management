@@ -13,7 +13,7 @@ def get_Reservation():
 
 @frappe.whitelist()
 def get_Reservation_between_date(ends_on,starts_on ):
-	sReservation = frappe.get_all('Single Reservations', filters={"reservation_date": ["between",  (starts_on, ends_on)]}, fields=['room'])
+	sReservation = frappe.get_all('Single Reservations', filters={"reservation_date": ["between",  (starts_on, ends_on)], "status": "Check-in"}, fields=['room'])
 	arrayOfSreservation = []
 	for s in sReservation:
 		arrayOfSreservation.append(s.room)

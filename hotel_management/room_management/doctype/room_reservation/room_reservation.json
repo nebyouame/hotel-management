@@ -17,6 +17,7 @@
   "roomsforreservation",
   "room_number",
   "payment_section",
+  "column_break_tuqd",
   "payment_list",
   "column_break_gpmt",
   "total",
@@ -91,12 +92,6 @@
    "label": "Payment"
   },
   {
-   "fieldname": "payment_list",
-   "fieldtype": "Table",
-   "label": "Payment List",
-   "options": "Room Payment"
-  },
-  {
    "fieldname": "column_break_gpmt",
    "fieldtype": "Column Break"
   },
@@ -127,11 +122,21 @@
    "fieldtype": "Currency",
    "ignore_user_permissions": 1,
    "label": "Remaining"
+  },
+  {
+   "fieldname": "column_break_tuqd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "payment_list",
+   "fieldtype": "Table",
+   "label": "Payment List",
+   "options": "Room Payment"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-31 08:32:42.495805",
+ "modified": "2024-09-21 11:32:37.802031",
  "modified_by": "Administrator",
  "module": "Room Management",
  "name": "Room Reservation",
@@ -158,6 +163,7 @@
    "read": 1,
    "report": 1,
    "role": "Reception",
+   "select": 1,
    "share": 1,
    "write": 1
   },
