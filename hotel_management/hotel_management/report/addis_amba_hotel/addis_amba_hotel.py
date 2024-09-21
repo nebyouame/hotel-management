@@ -1,6 +1,3 @@
-# Copyright (c) 2024, Powerware Technologies and contributors 
-# For license information, please see license.txt
-
 import frappe
 from frappe import _
 
@@ -15,50 +12,48 @@ def execute(filters=None):
     ]
     
     # Initialize conditions
-    conditions = ""
+    conditions = []
     
     # Apply filters
-    if filters.get("from_date"):
-        conditions += " AND h.creation >= %(from_date)s"
-    if filters.get("to_date"):
-        conditions += " AND h.creation <= %(to_date)s"
     if filters.get("ord_status"):
-        conditions += " AND h.status = %(ord_status)s"
-    
+        conditions.append("h.status = %(ord_status)s")
     
     if filters.get("menu_type"):
-        conditions += """ 
-        AND i.item_code IN (
+        conditions.append(""" 
+        i.item_code IN (
             SELECT name FROM `tabMenu`
             WHERE menu_type = %(menu_type)s
         )
-        """
+        """)
     
-
     if filters.get("menu"):
-        conditions += """
-        AND i.item_code = %(menu)s
-        """
+        conditions.append("i.item_code = %(menu)s")
     
-  
     if filters.get("paid_by"):
-        conditions += """
-        AND h.modified_by = %(paid_by)s
-        AND h.status = 'Paid'
-        """
+        conditions.append("h.modified_by = %(paid_by)s AND h.status = 'Paid'")
+
+    # Date filtering directly in the SQL statement
+    if filters.get("from_date") and filters.get("to_date"):
+        conditions.append("DATE(h.creation) BETWEEN %(from_date)s AND %(to_date)s")
+    elif filters.get("from_date"):
+        conditions.append("DATE(h.creation) >= %(from_date)s")
+    elif filters.get("to_date"):
+        conditions.append("DATE(h.creation) <= %(to_date)s")
+
+    # Combine conditions
+    condition_str = " AND ".join(conditions) if conditions else "1=1"
     
-   
     data = frappe.db.sql(f"""
         SELECT
-            h.name as hotel_order,
-            i.item_code as menu,
-            i.amount as amount
+            h.name AS hotel_order,
+            i.item_code AS menu,
+            i.amount AS amount
         FROM
             `tabHotel Order` h
         JOIN
             `tabHotel Order Item` i ON i.parent = h.name
         WHERE
-            1=1 {conditions}
+            {condition_str}
         ORDER BY
             h.order_date DESC
     """, filters, as_dict=1)
