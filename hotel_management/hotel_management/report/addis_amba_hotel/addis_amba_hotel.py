@@ -30,7 +30,7 @@ def execute(filters=None):
         conditions.append("i.item_code = %(menu)s")
     
     if filters.get("paid_by"):
-        conditions.append("h.modified_by = %(paid_by)s AND h.status = 'Paid'")
+        conditions.append("h.owner = %(paid_by)s")
 
     # Date filtering directly in the SQL statement
     if filters.get("from_date") and filters.get("to_date"):
