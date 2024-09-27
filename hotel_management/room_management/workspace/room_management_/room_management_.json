@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"YYrsggvncN\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Room Management</span>\",\"col\":12}},{\"id\":\"bPBZxvON1L\",\"type\":\"card\",\"data\":{\"card_name\":\"Reservation Management \",\"col\":4}},{\"id\":\"0wWHuaSf-H\",\"type\":\"card\",\"data\":{\"card_name\":\"Room Management\",\"col\":4}}]",
+ "content": "[{\"id\":\"YYrsggvncN\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Room Management </span>\",\"col\":12}},{\"id\":\"bPBZxvON1L\",\"type\":\"card\",\"data\":{\"card_name\":\"Reservation Management \",\"col\":4}},{\"id\":\"0wWHuaSf-H\",\"type\":\"card\",\"data\":{\"card_name\":\"Room Management\",\"col\":4}}]",
  "creation": "2024-09-06 10:49:41.183908",
  "custom_blocks": [],
  "docstatus": 0,
@@ -11,12 +11,12 @@
  "idx": 1,
  "indicator_color": "green",
  "is_hidden": 0,
- "label": "Room Management",
+ "label": "Room Management ",
  "links": [
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Reservation Management",
+   "label": "Reservation Management ",
    "link_count": 1,
    "link_type": "DocType",
    "onboard": 0,
@@ -62,10 +62,10 @@
    "type": "Link"
   }
  ],
- "modified": "2024-09-19 17:22:26.907612",
+ "modified": "2024-09-21 15:18:34.450561",
  "modified_by": "Administrator",
  "module": "Room Management",
- "name": "Room Management",
+ "name": "Room Management ",
  "number_cards": [],
  "owner": "Administrator",
  "parent_page": "",
@@ -74,5 +74,5 @@
  "roles": [],
  "sequence_id": 40.0,
  "shortcuts": [],
- "title": "Room Management"
+ "title": "Room Management "
 }

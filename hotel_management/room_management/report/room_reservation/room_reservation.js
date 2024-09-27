@@ -15,11 +15,17 @@ frappe.query_reports["Room Reservation"] = {
             "fieldtype": "Date",
             "default": frappe.datetime.nowdate()
         },
-        // {
-        //     "fieldname": "menu_type",
-        //     "label": __("Menu Type"),
-        //     "fieldtype": "Link",
-        //     "options": "Menu Type"
-        // }
+        {
+            "fieldname": "room_type",
+            "label": __("Room Type"),
+            "fieldtype": "Link",
+            "options": "Room Type"
+        },
+        {
+            "fieldname": "room",
+            "label": __("Room"),
+            "fieldtype": "Link",
+            "options": "Room"
+        }
 	]
 };
