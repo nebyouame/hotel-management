@@ -47,12 +47,11 @@
   },
   {
    "fieldname": "order_date",
-   "fieldtype": "Datetime",
+   "fieldtype": "Date",
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Date",
-   "read_only": 1,
-   "reqd": 1
+   "read_only": 1
   },
   {
    "fieldname": "total_qty",
@@ -94,7 +93,7 @@
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "label": "Series",
-   "options": "HOTEL-ORD-.YYYY.-",
+   "options": "HOTEL-ORD-.DD.MM.YYYY.-",
    "reqd": 1
   },
   {
@@ -128,7 +127,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-09-20 00:43:06.747535",
+ "modified": "2024-09-24 01:03:09.275718",
  "modified_by": "Administrator",
  "module": "Hotel Management",
  "name": "Hotel Order",
