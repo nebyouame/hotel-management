@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"YYrsggvncN\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Room Management </span>\",\"col\":12}},{\"id\":\"bPBZxvON1L\",\"type\":\"card\",\"data\":{\"card_name\":\"Reservation Management \",\"col\":4}},{\"id\":\"0wWHuaSf-H\",\"type\":\"card\",\"data\":{\"card_name\":\"Room Management\",\"col\":4}}]",
+ "content": "[{\"id\":\"YYrsggvncN\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Room Management </span>\",\"col\":12}},{\"id\":\"bPBZxvON1L\",\"type\":\"card\",\"data\":{\"card_name\":\"Reservation Management \",\"col\":4}},{\"id\":\"0wWHuaSf-H\",\"type\":\"card\",\"data\":{\"card_name\":\"Room Management\",\"col\":4}},{\"id\":\"BSl98jwqQ3\",\"type\":\"card\",\"data\":{\"card_name\":\"Report\",\"col\":4}}]",
  "creation": "2024-09-06 10:49:41.183908",
  "custom_blocks": [],
  "docstatus": 0,
@@ -60,9 +60,28 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Report",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Room Reservation Income",
+   "link_count": 0,
+   "link_to": "Room Reservation",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2024-09-21 15:18:34.450561",
+ "modified": "2024-09-27 12:33:12.072578",
  "modified_by": "Administrator",
  "module": "Room Management",
  "name": "Room Management ",
