@@ -209,7 +209,9 @@ frappe.ui.form.on('Room Payment', {
     },
     days: function (frm, cdt, cdn) {
         let row = locals[cdt][cdn];
-        let room = frm.doc.roomsforreservation.find(r => r.name == row.room)
+        let splits = row.room.split(" /")[0]
+        console.log("new split",splits)
+        let room = frm.doc.roomsforreservation.find(r => r.name ==  splits)
         console.log("room: ", room)
         if(row.add_penalty){
             frappe.model.set_value(cdt, cdn, 'amount', (row.days * room.price) + room.penalty);
@@ -219,7 +221,9 @@ frappe.ui.form.on('Room Payment', {
     },
     add_penalty: function (frm, cdt, cdn) {
         let row = locals[cdt][cdn];
-        let room = frm.doc.roomsforreservation.find(r => r.name == row.room)
+        let splits = row.room.split(" /")[0]
+        console.log("new split",splits)
+        let room = frm.doc.roomsforreservation.find(r => r.name ==  splits)
         console.log("room: ", room)
         if(row.add_penalty){
             frappe.model.set_value(cdt, cdn, 'amount', (row.days * room.price) + room.penalty);

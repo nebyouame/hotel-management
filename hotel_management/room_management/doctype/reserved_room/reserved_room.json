@@ -116,6 +116,7 @@
   },
   {
    "columns": 1,
+   "default": "Check-in",
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
@@ -135,7 +136,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-08-30 17:37:10.499953",
+ "modified": "2024-09-27 11:50:15.851590",
  "modified_by": "Administrator",
  "module": "Room Management",
  "name": "Reserved Room",
