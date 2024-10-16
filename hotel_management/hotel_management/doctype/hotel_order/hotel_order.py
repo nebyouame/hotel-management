@@ -5,12 +5,12 @@ from frappe.model.document import Document
 class HotelOrder(Document):
     def validate(self):
         self.calculate_totals()
-        self.validate_chief_for_menu()
+        self.validate_chief_for_menu() # Call to update stock entries
         print("validate_s")
         frappe.publish_realtime('update_single_order', {
-        'status': self.status
+            'status': self.status
         })
-        frappe.publish_progress(50,"my progress")
+        frappe.publish_progress(50, "my progress")
 
     def calculate_totals(self):
         total_qty = 0
@@ -36,4 +36,5 @@ class HotelOrder(Document):
             
             if not is_prepared_by_employee and item.chief:
                 frappe.throw(f"Remove the employee name for the {item.item_code} because it is not marked as prepared by an employee.")
-
+    
+    

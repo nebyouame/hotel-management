@@ -198,6 +198,26 @@ frappe.ui.form.on('Hotel Order Item', {
     },
     status: function(frm, cdt, cdn) {
         let row = locals[cdt][cdn];
+        
+        // Deduct stock when status is 'Delivered'
+        if (row.status === 'Delivered') {
+            frappe.call({
+                method: 'hotel_management.hotel_management.doctype.hotel_order.api.update_stock_entry_qty',
+                args: {
+                    menu_name: row.item_code,
+                    qty: row.qty,
+                    // warehouse: 'Stores - TTSP'  // Hardcoded warehouse
+                },
+                callback: function(r) {
+                    if (!r.exc) {
+                        frappe.show_alert({message: __('Stock deducted successfully'), indicator: 'green'});
+                    } else {
+                        frappe.msgprint(__('Error deducting stock: {0}', [r.exc]));
+                    }
+                }
+            });
+        }
+
         if (row.status === 'Cancelled') {
             frappe.model.set_value(cdt, cdn, 'rate', 0);
             frappe.model.set_value(cdt, cdn, 'amount', 0);
@@ -256,7 +276,6 @@ function toggleFields(frm) {
     frm.doc.hotel_items.forEach(function(item) {
         let isEditable = item.status === 'Pending'; // Allow editing only if status is Pending
         frappe.get_meta('Hotel Order Item').fields.forEach(function(field) {
-            
             frm.set_df_property(field.fieldname, 'read_only', !isEditable, item.name);
         });
     });
@@ -265,59 +284,30 @@ function toggleFields(frm) {
 function checkStatusForFSNumber(frm) {
     let has_delivered = false;
     let has_cancelled = false;
-    let has_pending_or_accepted = false;
 
     frm.doc.hotel_items.forEach(function(item) {
-        if (item.status === "Delivered") {
+        if (item.status === 'Delivered') {
             has_delivered = true;
-        }
-        if (item.status === "Cancelled") {
+        } else if (item.status === 'Cancelled') {
             has_cancelled = true;
         }
-        if (item.status === "Pending" || item.status === "Accepted") {
-            has_pending_or_accepted = true;
-        }
     });
-    const isPaid = frm.doc.status === 'Paid';
 
-    const showFSNumber = isPaid || (has_delivered && !has_pending_or_accepted);
-
-    frm.toggle_display('fs_num', showFSNumber);
+    if (has_delivered || has_cancelled) {
+        frm.set_df_property('fs_num', 'hidden', 0);
+    } else {
+        frm.set_df_property('fs_num', 'hidden', 1);
+    }
 }
 
+// Function to calculate total amount
 function calculateTotals(frm) {
-    let totalQty = 0, total = 0, totalVat = 0;
-
+    let total_qty = 0;
+    let total_amount = 0;
     frm.doc.hotel_items.forEach(function(item) {
-        totalQty += item.qty;
-        total += item.amount;
+        total_qty += item.qty;
+        total_amount += item.amount;
     });
-
-    totalVat = total - ((total * 0.15) / 1.15);
-
-    frappe.model.set_value(frm.doctype, frm.docname, 'total_qty', totalQty);
-    frappe.model.set_value(frm.doctype, frm.docname, 'tot_vat', total);
-    frappe.model.set_value(frm.doctype, frm.docname, 'total', totalVat);
+    frm.set_value('total_quantity', total_qty);
+    frm.set_value('total_amount', total_amount);
 }
-
-
-// frappe.realtime.on('update_single_order', function(data) {
-//     frappe.call({
-//         method: 'frappe.client.set_value',
-//         args: {
-//             doctype: 'Single Order',
-//             name: data.hotel_order_name,
-//             fieldname: 'status',
-//             value: data.status
-//         },
-//         callback: function(r) {
-//             if (!r.exc) {
-//                 frappe.show_alert({
-//                     message: __('Single Order {0} status updated to {1}', [data.hotel_order_name, data.status]),
-//                     indicator: 'blue',
-//                     persist: true
-//                 });
-//             }
-//         }
-//     });
-// });
