@@ -199,20 +199,18 @@ frappe.ui.form.on('Hotel Order Item', {
     status: function(frm, cdt, cdn) {
         let row = locals[cdt][cdn];
         
-        // Deduct stock when status is 'Delivered'
+        
         if (row.status === 'Delivered') {
             frappe.call({
                 method: 'hotel_management.hotel_management.doctype.hotel_order.api.update_stock_entry_qty',
                 args: {
                     menu_name: row.item_code,
                     qty: row.qty,
-                    // warehouse: 'Stores - TTSP'  // Hardcoded warehouse
+                    
                 },
                 callback: function(r) {
-                    if (!r.exc) {
+                    if (r.message) {
                         frappe.show_alert({message: __('Stock deducted successfully'), indicator: 'green'});
-                    } else {
-                        frappe.msgprint(__('Error deducting stock: {0}', [r.exc]));
                     }
                 }
             });
