@@ -202,7 +202,7 @@ frappe.ui.form.on('Hotel Order Item', {
         
         if (row.status === 'Delivered') {
             frappe.call({
-                method: 'hotel_management.hotel_management.doctype.hotel_order.api.update_stock_entry_qty',
+                method: 'hotel_management.hotel_management.doctype.hotel_order.api.create_delivery_note_for_menu',
                 args: {
                     menu_name: row.item_code,
                     qty: row.qty,
