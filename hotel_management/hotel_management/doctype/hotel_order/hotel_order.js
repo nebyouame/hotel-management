@@ -206,12 +206,16 @@ frappe.ui.form.on('Hotel Order Item', {
                 args: {
                     menu_name: row.item_code,
                     qty: row.qty,
-                    
+                    hotel_order_name: frm.doc.name
                 },
                 callback: function(r) {
                     if (r.message) {
                         frappe.show_alert({message: __('Stock deducted successfully'), indicator: 'green'});
                     }
+                },
+                error: function() {
+                    // frappe.msgprint(__('Failed to create Delivery Note. Setting status back to Pending.'));
+                    frappe.model.set_value(cdt, cdn, 'status', 'Pending');
                 }
             });
         }
@@ -265,14 +269,14 @@ frappe.ui.form.on('Hotel Order Item', {
         }
 
         checkStatusForFSNumber(frm);
-        toggleFields(frm); // Check and toggle fields after status change
+        toggleFields(frm); 
     }
 });
 
-// Function to toggle fields based on the status
+
 function toggleFields(frm) {
     frm.doc.hotel_items.forEach(function(item) {
-        let isEditable = item.status === 'Pending'; // Allow editing only if status is Pending
+        let isEditable = item.status === 'Pending'; 
         frappe.get_meta('Hotel Order Item').fields.forEach(function(field) {
             frm.set_df_property(field.fieldname, 'read_only', !isEditable, item.name);
         });
@@ -280,25 +284,40 @@ function toggleFields(frm) {
 }
 
 function checkStatusForFSNumber(frm) {
-    let has_delivered = false;
-    let has_cancelled = false;
+    let hasDelivered = false;
+    let hasCancelled = false;
+    let hasPending = false;
+    let hasPaid = false;
+    let allPaid = true;
 
     frm.doc.hotel_items.forEach(function(item) {
         if (item.status === 'Delivered') {
-            has_delivered = true;
+            hasDelivered = true;
+            allPaid = false;
         } else if (item.status === 'Cancelled') {
-            has_cancelled = true;
+            hasCancelled = true;
+            allPaid = false;
+        } else if (item.status === 'Pending') {
+            hasPending = true;
+            allPaid = false;
+        } else if (item.status === 'Paid') {
+            hasPaid = true;
+        } else {
+            allPaid = false;
         }
     });
 
-    if (has_delivered || has_cancelled) {
+    if (allPaid || 
+        (hasDelivered && !hasPending && (hasCancelled || !hasCancelled)) || 
+        (hasPaid && hasCancelled && !hasPending)
+    ) {
         frm.set_df_property('fs_num', 'hidden', 0);
     } else {
         frm.set_df_property('fs_num', 'hidden', 1);
     }
 }
 
-// Function to calculate total amount
+
 function calculateTotals(frm) {
     let total_qty = 0;
     let total_amount = 0;
