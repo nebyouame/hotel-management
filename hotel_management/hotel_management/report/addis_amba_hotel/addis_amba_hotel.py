@@ -31,8 +31,16 @@ def execute(filters=None):
     
     if filters.get("paid_by"):
         conditions.append("h.owner = %(paid_by)s")
-
-    # Date filtering directly in the SQL statement
+    
+    # Apply category filter if category is provided
+    if filters.get("category"):
+        conditions.append("""
+        i.item_code IN (
+            SELECT parent FROM `tabCategory_Table`
+            WHERE category_link = %(category)s
+        )
+        """)
+    
     if filters.get("from_date") and filters.get("to_date"):
         conditions.append("DATE(h.creation) BETWEEN %(from_date)s AND %(to_date)s")
     elif filters.get("from_date"):
@@ -40,7 +48,6 @@ def execute(filters=None):
     elif filters.get("to_date"):
         conditions.append("DATE(h.creation) <= %(to_date)s")
 
-    # Combine conditions
     condition_str = " AND ".join(conditions) if conditions else "1=1"
     
     data = frappe.db.sql(f"""
@@ -58,10 +65,8 @@ def execute(filters=None):
             h.order_date DESC
     """, filters, as_dict=1)
     
-    # Calculate the total VAT
-    total_amount = sum(row['amount'] for row in data if row['amount'])  # Ensure to handle None values
+    total_amount = sum(row['amount'] for row in data if row['amount'])
     
-    # Add total VAT to the data if data exists
     if data:
         data.append({
             "hotel_order": _("Total Amount"),

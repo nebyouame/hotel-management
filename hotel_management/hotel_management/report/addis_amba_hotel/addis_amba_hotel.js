@@ -39,6 +39,12 @@ frappe.query_reports["Restaurant Order"] = {
             "label": __("Order Status"),
             "fieldtype": "Select",
             "options": "\nUnpaid\nPaid"
-        }
+        },
+        {
+            "fieldname": "category",
+            "label": __("Category"),
+            "fieldtype": "Link",
+            "options": "Category"
+        },
     ]
 };

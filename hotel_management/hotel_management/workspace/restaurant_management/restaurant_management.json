@@ -9,7 +9,6 @@
  "hide_custom": 0,
  "icon": "retail",
  "idx": 0,
- "indicator_color": "green",
  "is_hidden": 0,
  "label": "Restaurant Management",
  "links": [
@@ -45,8 +44,27 @@
   {
    "hidden": 0,
    "is_query_report": 0,
+   "label": "Table Managment",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Table Number",
+   "link_count": 0,
+   "link_to": "Table Number",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
    "label": "Menu Managment",
-   "link_count": 2,
+   "link_count": 3,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -74,18 +92,9 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Table Managment",
-   "link_count": 1,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Table Number",
+   "label": "Category",
    "link_count": 0,
-   "link_to": "Table Number",
+   "link_to": "Category",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -94,7 +103,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Report",
-   "link_count": 1,
+   "link_count": 2,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -108,9 +117,19 @@
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Stock Report",
+   "link_count": 0,
+   "link_to": "Addis Amba Stock",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2024-09-17 02:17:20.265742",
+ "modified": "2024-11-09 04:32:23.016733",
  "modified_by": "Administrator",
  "module": "Hotel Management",
  "name": "Restaurant Management",
