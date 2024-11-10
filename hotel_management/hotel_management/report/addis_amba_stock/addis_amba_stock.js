@@ -25,18 +25,18 @@ frappe.query_reports["Addis Amba Stock"] = {
 			default: frappe.datetime.get_today(),
 			reqd: 1,
 		},
-		{
-			fieldname: "warehouse",
-			label: __("Warehouse"),
-			fieldtype: "Link",
-			options: "Warehouse",
-			get_query: function () {
-				const company = frappe.query_report.get_filter_value("company");
-				return {
-					filters: { company: company },
-				};
-			},
-		},
+		// {
+		// 	fieldname: "warehouse",
+		// 	label: __("Warehouse"),
+		// 	fieldtype: "Link",
+		// 	options: "Warehouse",
+		// 	get_query: function () {
+		// 		const company = frappe.query_report.get_filter_value("company");
+		// 		return {
+		// 			filters: { company: company },
+		// 		};
+		// 	},
+		// },
 		{
 			fieldname: "item_code",
 			label: __("Item"),
@@ -54,35 +54,35 @@ frappe.query_reports["Addis Amba Stock"] = {
 			fieldtype: "Link",
 			options: "Item Group",
 		},
-		{
-			fieldname: "batch_no",
-			label: __("Batch No"),
-			fieldtype: "Link",
-			options: "Batch",
-		},
-		{
-			fieldname: "brand",
-			label: __("Brand"),
-			fieldtype: "Link",
-			options: "Brand",
-		},
-		{
-			fieldname: "voucher_no",
-			label: __("Voucher #"),
-			fieldtype: "Data",
-		},
-		{
-			fieldname: "project",
-			label: __("Project"),
-			fieldtype: "Link",
-			options: "Project",
-		},
-		{
-			fieldname: "include_uom",
-			label: __("Include UOM"),
-			fieldtype: "Link",
-			options: "UOM",
-		},
+		// {
+		// 	fieldname: "batch_no",
+		// 	label: __("Batch No"),
+		// 	fieldtype: "Link",
+		// 	options: "Batch",
+		// },
+		// {
+		// 	fieldname: "brand",
+		// 	label: __("Brand"),
+		// 	fieldtype: "Link",
+		// 	options: "Brand",
+		// },
+		// {
+		// 	fieldname: "voucher_no",
+		// 	label: __("Voucher #"),
+		// 	fieldtype: "Data",
+		// },
+		// {
+		// 	fieldname: "project",
+		// 	label: __("Project"),
+		// 	fieldtype: "Link",
+		// 	options: "Project",
+		// },
+		// {
+		// 	fieldname: "include_uom",
+		// 	label: __("Include UOM"),
+		// 	fieldtype: "Link",
+		// 	options: "UOM",
+		// },
 		{
 			fieldname: "valuation_field_type",
 			label: __("Valuation Field Type"),

@@ -6,13 +6,13 @@ def execute(filters=None):
     
     # Define the columns for the report
     columns = [
+        {"label": _("Hotel Order"), "fieldname": "hotel_order", "fieldtype": "Link", "options": "Hotel Order"},
         {"label": _("Item Code"), "fieldname": "item_code", "fieldtype": "Link", "options": "Item"},
         {"label": _("Stock UOM"), "fieldname": "stock_uom", "fieldtype": "Data"},
-        {"label": _("Hotel Order"), "fieldname": "hotel_order", "fieldtype": "Link", "options": "Hotel Order"},
         {"label": _("Out Qty"), "fieldname": "out_qty", "fieldtype": "Float"},
         {"label": _("Incoming Rate"), "fieldname": "incoming_rate", "fieldtype": "Currency"},
-        {"label": _("Total Incoming Rate"), "fieldname": "total_incoming_rate", "fieldtype": "Currency"},
         {"label": _("Selling Price"), "fieldname": "selling_price", "fieldtype": "Currency"},
+        {"label": _("Total Incoming Rate"), "fieldname": "total_incoming_rate", "fieldtype": "Currency"},
         {"label": _("Total Selling Price"), "fieldname": "total_selling_price", "fieldtype": "Currency"},
         {"label": _("Profit"), "fieldname": "profit", "fieldtype": "Currency"},
         # {"label": _("Voucher No"), "fieldname": "voucher_no", "fieldtype": "Link", "options": "Delivery Note"},
@@ -70,10 +70,10 @@ def execute(filters=None):
     total_out_qty = sum(row['out_qty'] for row in data if row['out_qty'])
     
     # Calculate the total incoming rate (sum of incoming_rate * actual_qty)
-    total_incoming_rate = sum(row['incoming_rate'] * row.get('out_qty', 0) for row in data if row['incoming_rate'])
+    # total_incoming_rate = sum(row['incoming_rate'] * row.get('out_qty', 0) for row in data if row['incoming_rate'])
     
     # Calculate the total selling price (sum of selling_price * actual_qty)
-    total_selling_price = sum(row['selling_price'] * row.get('out_qty', 0) for row in data if row['selling_price'])
+    # total_selling_price = sum(row['selling_price'] * row.get('out_qty', 0) for row in data if row['selling_price'])
     
     # Calculate the total total selling price (sum of ABS(total_selling_price))
     total_absolute_selling_price = sum(row['total_selling_price'] for row in data)
@@ -91,10 +91,10 @@ def execute(filters=None):
     if data:
         # Add the total row to the report
         data.append({
-            "item_code": _("Total"),
-            # "out_qty": total_out_qty,
+            "hotel_order": _("Total"),
+            "out_qty": total_out_qty,
             # "incoming_rate": total_incoming_rate,
-            # "total_incoming_rate": total_absolute_incoming_rate,
+            "total_incoming_rate": total_absolute_incoming_rate,
             # "selling_price": total_selling_price,
             "total_selling_price": total_absolute_selling_price,
             "profit": total_profit  # Add total profit to the total row
